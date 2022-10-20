@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://114.132.251.197:3306/onlineclass
+    username: OnlineClass
+    password: TGxpGTetSxmnKepA
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    open-in-view: true
