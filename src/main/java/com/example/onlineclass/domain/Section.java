@@ -14,7 +14,7 @@ import java.io.Serializable;
 /**
  * @author jhlyh
  * @name; 章节名字
- * @type; 章节学习进度
+ * @state; 章节学习进度
  * @course 所属课程
  */
 @Data
@@ -29,7 +29,7 @@ public class Section implements Serializable {
     private final Long id;
 
     private String  name;
-    private Integer type;
+    private Integer state;
 
     @JsonIgnoreProperties("sections")
     @ManyToOne(optional = false)

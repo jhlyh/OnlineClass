@@ -26,7 +26,7 @@ public class SectionDetailImp implements SectionDetail{
         this.courseRepository = courseRepository;
     }
     @Override
-    public Map<String, Object> getAllSectionsPage(int page, int size, String[] sort) {
+    public Map<String, Object> getAllSectionsPage(Long courseId, int page, int size, String[] sort) {
         try{
             List<Order> orders = new ArrayList<>();
             if(sort[0].contains(",")) {
@@ -39,7 +39,7 @@ public class SectionDetailImp implements SectionDetail{
             }
 
             Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
-            Page<Section> sectionPage = sectionRepository.findAll(pageable);
+            Page<Section> sectionPage = sectionRepository.findByCourseId(courseId, pageable);
             List<Section> sections = sectionPage.getContent();
             Map<String, Object> response = new HashMap<>();
 
@@ -51,6 +51,7 @@ public class SectionDetailImp implements SectionDetail{
             return  response;
 
         } catch (Exception e) {
+            System.out.println(e.toString());
             return null;
         }
     }

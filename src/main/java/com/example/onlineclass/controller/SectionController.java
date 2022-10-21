@@ -2,9 +2,12 @@ package com.example.onlineclass.controller;
 
 import com.example.onlineclass.common.Result;
 import com.example.onlineclass.domain.Section;
+import com.example.onlineclass.repository.CourseRepository;
 import com.example.onlineclass.repository.SectionRepository;
 import com.example.onlineclass.service.SectionDetailImp;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author jhlyh
@@ -14,9 +17,11 @@ import org.springframework.web.bind.annotation.*;
 public class SectionController {
     private SectionRepository sectionRepository;
     private SectionDetailImp sectionDetailImp;
-    public SectionController(SectionRepository sectionRepository, SectionDetailImp sectionDetailImp) {
+    private CourseRepository courseRepository;
+    public SectionController(SectionRepository sectionRepository, SectionDetailImp sectionDetailImp, CourseRepository courseRepository) {
         this.sectionRepository = sectionRepository;
         this.sectionDetailImp = sectionDetailImp;
+        this.courseRepository = courseRepository;
     }
     @PostMapping("/add")
     public Result<?> addCourse(@RequestBody Section section) {
@@ -35,12 +40,13 @@ public class SectionController {
         }
     }
     @GetMapping("/findAll")
-    public Result<?> findAll(
+    public Result<?> findAllByCourseId(
+            @RequestParam Long courseId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
-        return Result.success(sectionDetailImp.getAllSectionsPage(page, size, sort));
+        return Result.success(sectionDetailImp.getAllSectionsPage(courseId, page, size, sort));
     }
     @GetMapping("/find")
     public Result<?> findById(@RequestParam Long id) {
@@ -60,6 +66,4 @@ public class SectionController {
             return Result.error("500",e.toString());
         }
     }
-
-
 }
