@@ -1,6 +1,7 @@
 package com.example.onlineclass.service;
 
 import com.example.onlineclass.domain.Section;
+import com.example.onlineclass.repository.CourseRepository;
 import com.example.onlineclass.repository.SectionRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,8 +20,10 @@ import java.util.Map;
 @Service
 public class SectionDetailImp implements SectionDetail{
     private SectionRepository sectionRepository;
-    public SectionDetailImp(SectionRepository sectionRepository) {
+    private CourseRepository courseRepository;
+    public SectionDetailImp(SectionRepository sectionRepository,CourseRepository courseRepository) {
         this.sectionRepository = sectionRepository;
+        this.courseRepository = courseRepository;
     }
     @Override
     public Map<String, Object> getAllSectionsPage(int page, int size, String[] sort) {

@@ -1,6 +1,8 @@
 package com.example.onlineclass.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,8 +31,8 @@ public class Section implements Serializable {
     private String  name;
     private Integer type;
 
-    @JsonBackReference
-    @ManyToOne(optional = true)
+    @JsonIgnoreProperties("sections")
+    @ManyToOne(optional = false)
     @JoinTable(
             name = "course_section",
             joinColumns = @JoinColumn(name = "section"),

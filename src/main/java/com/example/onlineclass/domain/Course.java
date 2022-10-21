@@ -1,6 +1,8 @@
 package com.example.onlineclass.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -37,7 +39,7 @@ public class Course implements Serializable {
     private Integer period;
 
     @ManyToOne(optional = false)
-    @JsonBackReference
+    @JsonIgnoreProperties("courses")
     @JoinTable(
             name = "teacher_course",
             joinColumns = @JoinColumn(name = "course"),
@@ -45,7 +47,7 @@ public class Course implements Serializable {
     )
     private Teacher teacher;
 
-    @JsonManagedReference
+    @JsonIgnoreProperties("course")
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Section> sections;
 }

@@ -1,5 +1,7 @@
 package com.example.onlineclass.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.*;
@@ -35,6 +37,6 @@ public class Teacher implements Serializable {
     private Integer level;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnoreProperties("teacher")
     private List<Course> courses;
 }
