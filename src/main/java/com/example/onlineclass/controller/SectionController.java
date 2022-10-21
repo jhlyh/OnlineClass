@@ -3,6 +3,7 @@ package com.example.onlineclass.controller;
 import com.example.onlineclass.common.Result;
 import com.example.onlineclass.domain.Section;
 import com.example.onlineclass.repository.SectionRepository;
+import com.example.onlineclass.service.SectionDetailImp;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/section")
 public class SectionController {
     private SectionRepository sectionRepository;
-    public SectionController(SectionRepository sectionRepository) {
+    private SectionDetailImp sectionDetailImp;
+    public SectionController(SectionRepository sectionRepository, SectionDetailImp sectionDetailImp) {
         this.sectionRepository = sectionRepository;
+        this.sectionDetailImp = sectionDetailImp;
     }
     @PostMapping("/add")
     public Result<?> addCourse(@RequestBody Section section) {
@@ -32,8 +35,12 @@ public class SectionController {
         }
     }
     @GetMapping("/findAll")
-    public Result<?> findAll() {
-        return Result.success(sectionRepository.findAll());
+    public Result<?> findAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "id,desc") String[] sort
+    ) {
+        return Result.success(sectionDetailImp.getAllSectionsPage(page, size, sort));
     }
     @GetMapping("/find")
     public Result<?> findById(@RequestParam Long id) {

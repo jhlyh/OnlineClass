@@ -3,6 +3,7 @@ package com.example.onlineclass.controller;
 import com.example.onlineclass.common.Result;
 import com.example.onlineclass.domain.Teacher;
 import com.example.onlineclass.repository.TeacherRepository;
+import com.example.onlineclass.service.TeacherDetailImp;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.*;
 public class TeacherController {
 
     private TeacherRepository teacherRepository;
-    public TeacherController(TeacherRepository teacherRepository) {
+    private TeacherDetailImp teacherDetailImp;
+    public TeacherController(TeacherRepository teacherRepository, TeacherDetailImp teacherDetailImp) {
         this.teacherRepository = teacherRepository;
+        this.teacherDetailImp = teacherDetailImp;
     }
     @PostMapping("/add")
     public Result<?> addTeacher(@RequestBody Teacher teacher) {
@@ -35,8 +38,12 @@ public class TeacherController {
         }
     }
     @GetMapping("/findAll")
-    public Result<?> findAllTeacher() {
-        return Result.success(teacherRepository.findAll());
+    public Result<?> findAllTeacher(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "id,desc") String[] sort) {
+
+        return Result.success(teacherDetailImp.getAllTeachersPage(page, size, sort));
     }
 
     @GetMapping("find")

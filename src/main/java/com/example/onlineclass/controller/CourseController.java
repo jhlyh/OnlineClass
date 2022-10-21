@@ -5,6 +5,7 @@ import com.example.onlineclass.domain.Course;
 import com.example.onlineclass.domain.Teacher;
 import com.example.onlineclass.repository.CourseRepository;
 import com.example.onlineclass.repository.TeacherRepository;
+import com.example.onlineclass.service.CourseDetailImp;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class CourseController {
 
     private CourseRepository courseRepository;
+    private CourseDetailImp courseDetailImp;
 
-    public CourseController(CourseRepository courseRepository) {
+
+    public CourseController(CourseRepository courseRepository, CourseDetailImp courseDetailImp) {
         this.courseRepository = courseRepository;
+        this.courseDetailImp = courseDetailImp;
     }
 
     @PostMapping("/add")
@@ -37,8 +41,12 @@ public class CourseController {
         }
     }
     @GetMapping("/findAll")
-    public Result<?> findAll() {
-        return Result.success(courseRepository.findAll());
+    public Result<?> findAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "id,desc") String[] sort
+    ) {
+        return Result.success(courseDetailImp.getAllCoursesPage(page, size, sort));
     }
     @GetMapping("/find")
     public Result<?> findById(@RequestParam Long id) {
