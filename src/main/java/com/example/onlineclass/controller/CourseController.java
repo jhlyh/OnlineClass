@@ -1,12 +1,19 @@
 package com.example.onlineclass.controller;
 
-import com.example.onlineclass.common.Result;
+import com.example.onlineclass.util.Result;
 import com.example.onlineclass.domain.Course;
-import com.example.onlineclass.domain.Teacher;
 import com.example.onlineclass.repository.CourseRepository;
-import com.example.onlineclass.repository.TeacherRepository;
 import com.example.onlineclass.service.CourseDetailImp;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.xbib.io.ftp.client.FTP;
+import org.xbib.io.ftp.client.FTPClient;
+import org.xbib.io.ftp.client.FTPReply;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.UUID;
 
 /**
  * @author jhlyh
@@ -65,5 +72,10 @@ public class CourseController {
         } catch (Exception e) {
             return Result.error("500",e.toString());
         }
+    }
+
+    @PostMapping("/uploadImage")
+    public Result<?> uploadImage(@RequestBody MultipartFile file) {
+        return courseDetailImp.uploadImage(file);
     }
 }

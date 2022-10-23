@@ -1,13 +1,11 @@
 package com.example.onlineclass.controller;
 
-import com.example.onlineclass.common.Result;
+import com.example.onlineclass.util.Result;
 import com.example.onlineclass.domain.Section;
 import com.example.onlineclass.repository.CourseRepository;
 import com.example.onlineclass.repository.SectionRepository;
 import com.example.onlineclass.service.SectionDetailImp;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @author jhlyh

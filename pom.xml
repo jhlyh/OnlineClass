@@ -47,6 +47,16 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.ftpserver</groupId>
+            <artifactId>ftpserver-deprecated</artifactId>
+            <version>1.0.0-M2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.xbib</groupId>
+            <artifactId>ftp-client</artifactId>
+            <version>2.6.0</version>
+        </dependency>
     </dependencies>
 
     <build>

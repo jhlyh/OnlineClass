@@ -1,4 +1,4 @@
-package com.example.onlineclass.common;
+package com.example.onlineclass.util;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

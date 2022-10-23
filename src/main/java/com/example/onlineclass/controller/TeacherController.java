@@ -1,6 +1,6 @@
 package com.example.onlineclass.controller;
 
-import com.example.onlineclass.common.Result;
+import com.example.onlineclass.util.Result;
 import com.example.onlineclass.domain.Teacher;
 import com.example.onlineclass.repository.TeacherRepository;
 import com.example.onlineclass.service.TeacherDetailImp;
