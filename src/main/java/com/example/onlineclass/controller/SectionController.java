@@ -1,8 +1,8 @@
 package com.example.onlineclass.controller;
 
+import com.example.onlineclass.config.CommonProps;
 import com.example.onlineclass.util.Result;
 import com.example.onlineclass.domain.Section;
-import com.example.onlineclass.repository.CourseRepository;
 import com.example.onlineclass.repository.SectionRepository;
 import com.example.onlineclass.service.SectionDetailImp;
 import org.springframework.web.bind.annotation.*;
@@ -15,28 +15,32 @@ import org.springframework.web.bind.annotation.*;
 public class SectionController {
     private SectionRepository sectionRepository;
     private SectionDetailImp sectionDetailImp;
-    private CourseRepository courseRepository;
-    public SectionController(SectionRepository sectionRepository, SectionDetailImp sectionDetailImp, CourseRepository courseRepository) {
+    private CommonProps commonProps;
+
+    public SectionController(SectionRepository sectionRepository, SectionDetailImp sectionDetailImp, CommonProps commonProps) {
         this.sectionRepository = sectionRepository;
         this.sectionDetailImp = sectionDetailImp;
-        this.courseRepository = courseRepository;
+        this.commonProps = commonProps;
     }
+
     @PostMapping("/add")
     public Result<?> addCourse(@RequestBody Section section) {
-        try{
+        try {
             return Result.success(sectionRepository.save(section));
         } catch (Exception e) {
-            return Result.error("500", e.toString());
+            return Result.error(commonProps.getAfterEndError(), e.toString());
         }
     }
+
     @PostMapping("/update")
     public Result<?> update(@RequestBody Section section) {
-        try{
+        try {
             return Result.success(sectionRepository.save(section));
         } catch (Exception e) {
-            return Result.error("500", e.toString());
+            return Result.error(commonProps.getAfterEndError(), e.toString());
         }
     }
+
     @GetMapping("/findAll")
     public Result<?> findAllByCourseId(
             @RequestParam Long courseId,
@@ -46,22 +50,24 @@ public class SectionController {
     ) {
         return Result.success(sectionDetailImp.getAllSectionsPage(courseId, page, size, sort));
     }
+
     @GetMapping("/find")
     public Result<?> findById(@RequestParam Long id) {
-        try{
+        try {
             Section section = sectionRepository.findById(id).get();
             return Result.success(section);
         } catch (Exception e) {
-            return Result.error("500", e.toString());
+            return Result.error(commonProps.getAfterEndError(), e.toString());
         }
     }
+
     @DeleteMapping("delete")
     public Result<?> deleteById(@RequestParam Long id) {
         try {
             sectionRepository.deleteById(id);
             return Result.success();
         } catch (Exception e) {
-            return Result.error("500",e.toString());
+            return Result.error(commonProps.getAfterEndError(), e.toString());
         }
     }
 }

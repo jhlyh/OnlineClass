@@ -1,19 +1,13 @@
 package com.example.onlineclass.controller;
 
+import com.example.onlineclass.config.CommonProps;
+import com.example.onlineclass.config.CourseProps;
 import com.example.onlineclass.util.Result;
 import com.example.onlineclass.domain.Course;
 import com.example.onlineclass.repository.CourseRepository;
 import com.example.onlineclass.service.CourseDetailImp;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.xbib.io.ftp.client.FTP;
-import org.xbib.io.ftp.client.FTPClient;
-import org.xbib.io.ftp.client.FTPReply;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.UUID;
 
 /**
  * @author jhlyh
@@ -24,29 +18,33 @@ public class CourseController {
 
     private CourseRepository courseRepository;
     private CourseDetailImp courseDetailImp;
+    private CommonProps commonProps;
 
 
-    public CourseController(CourseRepository courseRepository, CourseDetailImp courseDetailImp) {
+    public CourseController(CourseRepository courseRepository, CourseDetailImp courseDetailImp, CommonProps commonProps) {
         this.courseRepository = courseRepository;
         this.courseDetailImp = courseDetailImp;
+        this.commonProps = commonProps;
     }
 
     @PostMapping("/add")
     public Result<?> addCourse(@RequestBody Course course) {
-        try{
+        try {
             return Result.success(courseRepository.save(course));
         } catch (Exception e) {
-            return Result.error("500", e.toString());
+            return Result.error(commonProps.getAfterEndError(), e.toString());
         }
     }
+
     @PostMapping("/update")
     public Result<?> update(@RequestBody Course course) {
-        try{
+        try {
             return Result.success(courseRepository.save(course));
         } catch (Exception e) {
-            return Result.error("500", e.toString());
+            return Result.error(commonProps.getAfterEndError(), e.toString());
         }
     }
+
     @GetMapping("/findAll")
     public Result<?> findAll(
             @RequestParam(defaultValue = "0") int page,
@@ -55,22 +53,24 @@ public class CourseController {
     ) {
         return Result.success(courseDetailImp.getAllCoursesPage(page, size, sort));
     }
+
     @GetMapping("/find")
     public Result<?> findById(@RequestParam Long id) {
-        try{
+        try {
             Course course = courseRepository.findById(id).get();
             return Result.success(course);
         } catch (Exception e) {
-            return Result.error("500", e.toString());
+            return Result.error(commonProps.getAfterEndError(), e.toString());
         }
     }
+
     @DeleteMapping("delete")
     public Result<?> deleteById(@RequestParam Long id) {
         try {
             courseRepository.deleteById(id);
             return Result.success();
         } catch (Exception e) {
-            return Result.error("500",e.toString());
+            return Result.error(commonProps.getAfterEndError(), e.toString());
         }
     }
 

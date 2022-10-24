@@ -1,5 +1,6 @@
 package com.example.onlineclass.controller;
 
+import com.example.onlineclass.config.CommonProps;
 import com.example.onlineclass.util.Result;
 import com.example.onlineclass.domain.Teacher;
 import com.example.onlineclass.repository.TeacherRepository;
@@ -15,28 +16,34 @@ public class TeacherController {
 
     private TeacherRepository teacherRepository;
     private TeacherDetailImp teacherDetailImp;
-    public TeacherController(TeacherRepository teacherRepository, TeacherDetailImp teacherDetailImp) {
+    private CommonProps commonProps;
+
+    public TeacherController(TeacherRepository teacherRepository, TeacherDetailImp teacherDetailImp, CommonProps commonProps) {
         this.teacherRepository = teacherRepository;
         this.teacherDetailImp = teacherDetailImp;
+        this.commonProps = commonProps;
     }
+
     @PostMapping("/add")
     public Result<?> addTeacher(@RequestBody Teacher teacher) {
         try {
 
             return Result.success(teacherRepository.save(teacher));
         } catch (Exception e) {
-            return Result.error("400", e.toString());
+            return Result.error(commonProps.getFrontEndError(), e.toString());
         }
     }
+
     @PostMapping("/update")
     public Result<?> updateTeacher(@RequestBody Teacher teacher) {
         try {
             teacherRepository.save(teacher);
             return Result.success(teacher);
         } catch (Exception e) {
-            return Result.error("400", e.toString());
+            return Result.error(commonProps.getFrontEndError(), e.toString());
         }
     }
+
     @GetMapping("/findAll")
     public Result<?> findAllTeacher(
             @RequestParam(defaultValue = "0") int page,
@@ -48,20 +55,21 @@ public class TeacherController {
 
     @GetMapping("find")
     public Result<?> findByIdTeacher(@RequestParam Long id) {
-        try{
+        try {
             Teacher teacher = teacherRepository.findById(id).get();
             return Result.success(teacher);
         } catch (Exception e) {
-            return Result.error("500", e.toString());
+            return Result.error(commonProps.getFrontEndError(), e.toString());
         }
     }
+
     @DeleteMapping("/delete")
     public Result<?> deleteByIdTeacher(@RequestParam Long id) {
-        try{
+        try {
             teacherRepository.deleteById(id);
             return Result.success();
-        } catch (Exception e){
-            return Result.error("500",e.toString());
+        } catch (Exception e) {
+            return Result.error(commonProps.getFrontEndError(), e.toString());
         }
     }
 }
