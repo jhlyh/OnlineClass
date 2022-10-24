@@ -15,10 +15,10 @@ import java.util.List;
 
 /**
  * @author jhlyh
- *@name; 课程名字
- *@Type; 课程类型
- *@imageUrl； 封面
- *@period; 课时
+ * @name; 课程名字
+ * @Type; 课程类型
+ * @imageUrl； 封面
+ * @period; 课时
  * @teacher 授课老师
  * @sections 课程章节
  */

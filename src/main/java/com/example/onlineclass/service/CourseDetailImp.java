@@ -23,10 +23,11 @@ import java.util.*;
  * @author jhlyh
  */
 @Service
-public class CourseDetailImp implements CourseDetail{
+public class CourseDetailImp implements CourseDetail {
     private CourseRepository courseRepository;
     private CourseProps courseProps;
     private CommonProps commonProps;
+
     public CourseDetailImp(CourseRepository courseRepository, CourseProps courseProps, CommonProps commonProps) {
         this.courseRepository = courseRepository;
         this.courseProps = courseProps;
@@ -34,44 +35,17 @@ public class CourseDetailImp implements CourseDetail{
     }
 
     @Override
-    public Result<?> uploadImage(MultipartFile multipartFile) {
-        String fileName = multipartFile.getOriginalFilename();
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));
-        fileName = UUID.randomUUID() + suffixName;
-
-        int port = Integer.parseInt(courseProps.getFtpPort());
-        boolean result = false;
-        FTPClient ftpClient = new FTPClient();
-        try{
-            int reply;
-            ftpClient.connect(courseProps.getFtpHost(), port);
-            ftpClient.login(courseProps.getFtpUserName(), courseProps.getFtpPassword());
-            reply = ftpClient.getReplyCode();
-            if(!FTPReply.isPositiveCompletion(reply)) {
-                ftpClient.disconnect();
-                return Result.error(commonProps.getFrontEndError(), String.valueOf(result));
-            }
-            ftpClient.changeWorkingDirectory(courseProps.getFtpPathName());
-            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-            ftpClient.storeFile(fileName,multipartFile.getInputStream());
-        } catch (Exception e) {
-            return Result.success(e.toString());
-        }
-
-        return Result.success(courseProps.getNginxPath()+fileName);
-    }
-    @Override
     public Map<String, Object> getAllCoursesPage(int page, int size, String[] sort) {
 
-        try{
+        try {
             List<Order> orders = new ArrayList<>();
-            if(sort[0].contains(",")) {
-                for(String sortOrder : sort) {
+            if (sort[0].contains(",")) {
+                for (String sortOrder : sort) {
                     String[] _sort = sortOrder.split(",");
-                    orders.add(new Order(Direction.fromString(_sort[courseProps.getSortDirectionIndex()]),_sort[courseProps.getTheSortByIndex()]));
+                    orders.add(new Order(Direction.fromString(_sort[courseProps.getSortDirectionIndex()]), _sort[courseProps.getTheSortByIndex()]));
                 }
             } else {
-                orders.add(new Order(Direction.fromString(sort[courseProps.getSortDirectionIndex()]),sort[courseProps.getTheSortByIndex()]));
+                orders.add(new Order(Direction.fromString(sort[courseProps.getSortDirectionIndex()]), sort[courseProps.getTheSortByIndex()]));
             }
             Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
             Page<Course> coursePage;

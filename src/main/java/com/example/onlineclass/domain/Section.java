@@ -28,8 +28,9 @@ public class Section implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final Long id;
 
-    private String  name;
+    private String name;
     private Integer state;
+    private String videoUrl;
 
     @JsonIgnoreProperties("sections")
     @ManyToOne(optional = false)

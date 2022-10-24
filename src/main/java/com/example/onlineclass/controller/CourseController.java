@@ -73,9 +73,4 @@ public class CourseController {
             return Result.error(commonProps.getAfterEndError(), e.toString());
         }
     }
-
-    @PostMapping("/uploadImage")
-    public Result<?> uploadImage(@RequestBody MultipartFile file) {
-        return courseDetailImp.uploadImage(file);
-    }
 }

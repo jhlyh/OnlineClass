@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * 返回结果封装
+ *
  * @author jhlyh
  */
 @Data
