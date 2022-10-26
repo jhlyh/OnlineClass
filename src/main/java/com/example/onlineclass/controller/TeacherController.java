@@ -72,4 +72,12 @@ public class TeacherController {
             return Result.error(commonProps.getFrontEndError(), e.toString());
         }
     }
+    @GetMapping("/findIdName")
+    public Result<?> findAllIdAndName() {
+        try {
+            return Result.success(teacherRepository.findAllBy());
+        } catch (Exception e) {
+            return Result.error(commonProps.getFrontEndError(), e.toString());
+        }
+    }
 }

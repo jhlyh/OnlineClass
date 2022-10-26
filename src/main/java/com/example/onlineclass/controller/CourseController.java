@@ -73,4 +73,12 @@ public class CourseController {
             return Result.error(commonProps.getAfterEndError(), e.toString());
         }
     }
+    @GetMapping("/findIdName")
+    public Result<?> findAllIdAndName() {
+        try {
+            return Result.success(courseRepository.findAllBy());
+        } catch (Exception e) {
+            return Result.error(commonProps.getAfterEndError(), e.toString());
+        }
+    }
 }

@@ -9,5 +9,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author jhlyh
  */
 public interface SectionRepository extends JpaRepository<Section, Long> {
+    /**
+     *
+     * @param courseId
+     * @param pageable
+     * @return
+     */
     Page<Section> findByCourseId(Long courseId, Pageable pageable);
 }
