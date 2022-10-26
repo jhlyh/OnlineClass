@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class SectionProps {
+public class ChapterProps {
     private Integer sortDirectionIndex = 1;
     private Integer theSortByIndex = 0;
     private String returnSections = "sections";

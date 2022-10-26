@@ -1,7 +1,5 @@
 package com.example.onlineclass.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -10,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author jhlyh
@@ -26,7 +25,7 @@ import java.io.Serializable;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
-public class Section implements Serializable {
+public class Chapter implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -39,11 +38,19 @@ public class Section implements Serializable {
     private String info;
     private Integer sort;
 
-    @JsonIgnoreProperties("sections")
+    @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("chapter")
+    private List<StudyLog> studyLogs;
+
+    @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("chapter")
+    private List<Note> notes;
+
+    @JsonIgnoreProperties("chapters")
     @ManyToOne(optional = false)
     @JoinTable(
-            name = "course_section",
-            joinColumns = @JoinColumn(name = "section"),
+            name = "course_chapter",
+            joinColumns = @JoinColumn(name = "chapter"),
             inverseJoinColumns = @JoinColumn(name = "course")
     )
     private Course course;

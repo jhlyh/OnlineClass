@@ -2,9 +2,9 @@ package com.example.onlineclass.controller;
 
 import com.example.onlineclass.config.CommonProps;
 import com.example.onlineclass.util.Result;
-import com.example.onlineclass.domain.Section;
-import com.example.onlineclass.repository.SectionRepository;
-import com.example.onlineclass.service.SectionDetailImp;
+import com.example.onlineclass.domain.Chapter;
+import com.example.onlineclass.repository.ChapterRepository;
+import com.example.onlineclass.service.ChapterDetailImp;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,30 +12,30 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/section")
-public class SectionController {
-    private SectionRepository sectionRepository;
-    private SectionDetailImp sectionDetailImp;
+public class ChapterController {
+    private ChapterRepository sectionRepository;
+    private ChapterDetailImp sectionDetailImp;
     private CommonProps commonProps;
 
-    public SectionController(SectionRepository sectionRepository, SectionDetailImp sectionDetailImp, CommonProps commonProps) {
+    public ChapterController(ChapterRepository sectionRepository, ChapterDetailImp sectionDetailImp, CommonProps commonProps) {
         this.sectionRepository = sectionRepository;
         this.sectionDetailImp = sectionDetailImp;
         this.commonProps = commonProps;
     }
 
     @PostMapping("/add")
-    public Result<?> addCourse(@RequestBody Section section) {
+    public Result<?> addCourse(@RequestBody Chapter chapter) {
         try {
-            return Result.success(sectionRepository.save(section));
+            return Result.success(sectionRepository.save(chapter));
         } catch (Exception e) {
             return Result.error(commonProps.getAfterEndError(), e.toString());
         }
     }
 
     @PostMapping("/update")
-    public Result<?> update(@RequestBody Section section) {
+    public Result<?> update(@RequestBody Chapter chapter) {
         try {
-            return Result.success(sectionRepository.save(section));
+            return Result.success(sectionRepository.save(chapter));
         } catch (Exception e) {
             return Result.error(commonProps.getAfterEndError(), e.toString());
         }
@@ -54,8 +54,8 @@ public class SectionController {
     @GetMapping("/find")
     public Result<?> findById(@RequestParam Long id) {
         try {
-            Section section = sectionRepository.findById(id).get();
-            return Result.success(section);
+            Chapter chapter = sectionRepository.findById(id).get();
+            return Result.success(chapter);
         } catch (Exception e) {
             return Result.error(commonProps.getAfterEndError(), e.toString());
         }
