@@ -25,7 +25,7 @@ public class TeacherController {
     }
 
     @PostMapping("/add")
-    public Result<?> addTeacher(@RequestBody Teacher teacher) {
+    public Result<?> add(@RequestBody Teacher teacher) {
         try {
 
             return Result.success(teacherRepository.save(teacher));
@@ -35,7 +35,7 @@ public class TeacherController {
     }
 
     @PostMapping("/update")
-    public Result<?> updateTeacher(@RequestBody Teacher teacher) {
+    public Result<?> update(@RequestBody Teacher teacher) {
         try {
             teacherRepository.save(teacher);
             return Result.success(teacher);
@@ -45,7 +45,7 @@ public class TeacherController {
     }
 
     @GetMapping("/findAll")
-    public Result<?> findAllTeacher(
+    public Result<?> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort) {
@@ -54,7 +54,7 @@ public class TeacherController {
     }
 
     @GetMapping("find")
-    public Result<?> findByIdTeacher(@RequestParam Long id) {
+    public Result<?> findById(@RequestParam Long id) {
         try {
             Teacher teacher = teacherRepository.findById(id).get();
             return Result.success(teacher);
@@ -64,7 +64,7 @@ public class TeacherController {
     }
 
     @DeleteMapping("/delete")
-    public Result<?> deleteByIdTeacher(@RequestParam Long id) {
+    public Result<?> deleteById(@RequestParam Long id) {
         try {
             teacherRepository.deleteById(id);
             return Result.success();

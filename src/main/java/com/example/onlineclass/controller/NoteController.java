@@ -17,7 +17,7 @@ public class NoteController {
         this.noteRepository =noteRepository;
     }
     @PostMapping("/add")
-    public Result<?> addGrade(@RequestBody Note note) {
+    public Result<?> add(@RequestBody Note note) {
         try {
             return Result.success(noteRepository.save(note));
         } catch (Exception e) {
@@ -25,7 +25,7 @@ public class NoteController {
         }
     }
     @PostMapping("update")
-    public Result<?> updateGrade(@RequestBody Note note) {
+    public Result<?> update(@RequestBody Note note) {
         try {
             return Result.success(noteRepository.save(note));
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class NoteController {
      * @return
      */
     @GetMapping("/findAll")
-    public Result<?> findAllGrade(
+    public Result<?> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
@@ -49,7 +49,7 @@ public class NoteController {
         return Result.success(noteRepository.findAll());
     }
     @GetMapping("find")
-    public Result<?> findByIdGrade(@RequestParam Long id) {
+    public Result<?> findById(@RequestParam Long id) {
         try {
             Note note = noteRepository.findById(id).get();
             return Result.success(note);
@@ -58,7 +58,7 @@ public class NoteController {
         }
     }
     @DeleteMapping("/delete")
-    public Result<?> deleteByIdTeacher(@RequestParam Long id) {
+    public Result<?> deleteById(@RequestParam Long id) {
         try {
             noteRepository.deleteById(id);
             return Result.success();

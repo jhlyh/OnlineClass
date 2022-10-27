@@ -17,7 +17,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
     @PostMapping("/add")
-    public Result<?> addGrade(@RequestBody User user) {
+    public Result<?> add(@RequestBody User user) {
         try {
             return Result.success(userRepository.save(user));
         } catch (Exception e) {
@@ -25,7 +25,7 @@ public class UserController {
         }
     }
     @PostMapping("update")
-    public Result<?> updateGrade(@RequestBody User user) {
+    public Result<?> update(@RequestBody User user) {
         try {
             return Result.success(userRepository.save(user));
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class UserController {
      * @return
      */
     @GetMapping("/findAll")
-    public Result<?> findAllGrade(
+    public Result<?> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
@@ -49,7 +49,7 @@ public class UserController {
         return Result.success(userRepository.findAll());
     }
     @GetMapping("find")
-    public Result<?> findByIdGrade(@RequestParam Long id) {
+    public Result<?> findById(@RequestParam Long id) {
         try {
             User user = userRepository.findById(id).get();
             return Result.success(user);
@@ -58,7 +58,7 @@ public class UserController {
         }
     }
     @DeleteMapping("/delete")
-    public Result<?> deleteByIdTeacher(@RequestParam Long id) {
+    public Result<?> deleteById(@RequestParam Long id) {
         try {
             userRepository.deleteById(id);
             return Result.success();

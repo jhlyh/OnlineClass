@@ -17,7 +17,7 @@ public class StudyLogController {
         this.studyLogRepository = studyLogRepository;
     }
     @PostMapping("/add")
-    public Result<?> addGrade(@RequestBody StudyLog studyLog) {
+    public Result<?> add(@RequestBody StudyLog studyLog) {
         try {
             return Result.success(studyLogRepository.save(studyLog));
         } catch (Exception e) {
@@ -25,7 +25,7 @@ public class StudyLogController {
         }
     }
     @PostMapping("update")
-    public Result<?> updateGrade(@RequestBody StudyLog studyLog) {
+    public Result<?> update(@RequestBody StudyLog studyLog) {
         try {
             return Result.success(studyLogRepository.save(studyLog));
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class StudyLogController {
      * @return
      */
     @GetMapping("/findAll")
-    public Result<?> findAllGrade(
+    public Result<?> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
@@ -49,7 +49,7 @@ public class StudyLogController {
         return Result.success(studyLogRepository.findAll());
     }
     @GetMapping("find")
-    public Result<?> findByIdGrade(@RequestParam Long id) {
+    public Result<?> findById(@RequestParam Long id) {
         try {
             StudyLog studyLog = studyLogRepository.findById(id).get();
             return Result.success(studyLog);
@@ -58,7 +58,7 @@ public class StudyLogController {
         }
     }
     @DeleteMapping("/delete")
-    public Result<?> deleteByIdTeacher(@RequestParam Long id) {
+    public Result<?> deleteById(@RequestParam Long id) {
         try {
             studyLogRepository.deleteById(id);
             return Result.success();

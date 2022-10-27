@@ -24,7 +24,7 @@ public class ChapterController {
     }
 
     @PostMapping("/add")
-    public Result<?> addCourse(@RequestBody Chapter chapter) {
+    public Result<?> add(@RequestBody Chapter chapter) {
         try {
             return Result.success(chapterRepository.save(chapter));
         } catch (Exception e) {

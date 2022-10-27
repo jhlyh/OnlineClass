@@ -16,7 +16,7 @@ public class GradeController {
         this.gradeRepository = gradeRepository;
     }
     @PostMapping("/add")
-    public Result<?> addGrade(@RequestBody Grade grade) {
+    public Result<?> add(@RequestBody Grade grade) {
         try {
             return Result.success(gradeRepository.save(grade));
         } catch (Exception e) {
@@ -24,7 +24,7 @@ public class GradeController {
         }
     }
     @PostMapping("update")
-    public Result<?> updateGrade(@RequestBody Grade grade) {
+    public Result<?> update(@RequestBody Grade grade) {
         try {
             return Result.success(gradeRepository.save(grade));
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class GradeController {
      * @return
      */
     @GetMapping("/findAll")
-    public Result<?> findAllGrade(
+    public Result<?> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
@@ -48,7 +48,7 @@ public class GradeController {
         return Result.success(gradeRepository.findAll());
     }
     @GetMapping("find")
-    public Result<?> findByIdGrade(@RequestParam Long id) {
+    public Result<?> findById(@RequestParam Long id) {
         try {
             Grade grade = gradeRepository.findById(id).get();
             return Result.success(grade);
@@ -57,7 +57,7 @@ public class GradeController {
         }
     }
     @DeleteMapping("/delete")
-    public Result<?> deleteByIdTeacher(@RequestParam Long id) {
+    public Result<?> deleteById(@RequestParam Long id) {
         try {
             gradeRepository.deleteById(id);
             return Result.success();

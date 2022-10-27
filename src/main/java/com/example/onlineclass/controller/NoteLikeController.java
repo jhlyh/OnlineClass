@@ -17,7 +17,7 @@ public class NoteLikeController {
         this.noteLikeRepository = noteLikeRepository;
     }
     @PostMapping("/add")
-    public Result<?> addGrade(@RequestBody NoteLike noteLike) {
+    public Result<?> add(@RequestBody NoteLike noteLike) {
         try {
             return Result.success(noteLikeRepository.save(noteLike));
         } catch (Exception e) {
@@ -25,7 +25,7 @@ public class NoteLikeController {
         }
     }
     @PostMapping("update")
-    public Result<?> updateGrade(@RequestBody NoteLike noteLike) {
+    public Result<?> update(@RequestBody NoteLike noteLike) {
         try {
             return Result.success(noteLikeRepository.save(noteLike));
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class NoteLikeController {
      * @return
      */
     @GetMapping("/findAll")
-    public Result<?> findAllGrade(
+    public Result<?> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
@@ -49,7 +49,7 @@ public class NoteLikeController {
         return Result.success(noteLikeRepository.findAll());
     }
     @GetMapping("find")
-    public Result<?> findByIdGrade(@RequestParam Long id) {
+    public Result<?> findById(@RequestParam Long id) {
         try {
             NoteLike noteLike = noteLikeRepository.findById(id).get();
             return Result.success(noteLike);
@@ -58,7 +58,7 @@ public class NoteLikeController {
         }
     }
     @DeleteMapping("/delete")
-    public Result<?> deleteByIdTeacher(@RequestParam Long id) {
+    public Result<?> deleteById(@RequestParam Long id) {
         try {
             noteLikeRepository.deleteById(id);
             return Result.success();

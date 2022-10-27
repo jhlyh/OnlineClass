@@ -16,7 +16,7 @@ public class UserGradeController {
         this.userGradeRepository = userGradeRepository;
     }
     @PostMapping("/add")
-    public Result<?> addGrade(@RequestBody UserGrade userGrade) {
+    public Result<?> add(@RequestBody UserGrade userGrade) {
         try {
             return Result.success(userGradeRepository.save(userGrade));
         } catch (Exception e) {
@@ -24,7 +24,7 @@ public class UserGradeController {
         }
     }
     @PostMapping("update")
-    public Result<?> updateGrade(@RequestBody UserGrade userGrade) {
+    public Result<?> update(@RequestBody UserGrade userGrade) {
         try {
             return Result.success(userGradeRepository.save(userGrade));
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class UserGradeController {
      * @return
      */
     @GetMapping("/findAll")
-    public Result<?> findAllGrade(
+    public Result<?> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
@@ -48,7 +48,7 @@ public class UserGradeController {
         return Result.success(userGradeRepository.findAll());
     }
     @GetMapping("find")
-    public Result<?> findByIdGrade(@RequestParam Long id) {
+    public Result<?> findById(@RequestParam Long id) {
         try {
             UserGrade userGrade = userGradeRepository.findById(id).get();
             return Result.success(userGrade);
@@ -57,7 +57,7 @@ public class UserGradeController {
         }
     }
     @DeleteMapping("/delete")
-    public Result<?> deleteByIdTeacher(@RequestParam Long id) {
+    public Result<?> deleteById(@RequestParam Long id) {
         try {
             userGradeRepository.deleteById(id);
             return Result.success();

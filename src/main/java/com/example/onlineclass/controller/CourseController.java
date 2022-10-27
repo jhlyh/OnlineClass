@@ -26,7 +26,7 @@ public class CourseController {
     }
 
     @PostMapping("/add")
-    public Result<?> addCourse(@RequestBody Course course) {
+    public Result<?> add(@RequestBody Course course) {
         try {
             return Result.success(courseRepository.save(course));
         } catch (Exception e) {

@@ -17,7 +17,7 @@ public class TypeController {
         this.typeRepository = typeRepository;
     }
     @PostMapping("/add")
-    public Result<?> addGrade(@RequestBody Type type) {
+    public Result<?> add(@RequestBody Type type) {
         try {
             return Result.success(typeRepository.save(type));
         } catch (Exception e) {
@@ -25,7 +25,7 @@ public class TypeController {
         }
     }
     @PostMapping("update")
-    public Result<?> updateGrade(@RequestBody Type type) {
+    public Result<?> update(@RequestBody Type type) {
         try {
             return Result.success(typeRepository.save(type));
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class TypeController {
      * @return
      */
     @GetMapping("/findAll")
-    public Result<?> findAllGrade(
+    public Result<?> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
@@ -49,7 +49,7 @@ public class TypeController {
         return Result.success(typeRepository.findAll());
     }
     @GetMapping("find")
-    public Result<?> findByIdGrade(@RequestParam Long id) {
+    public Result<?> findById(@RequestParam Long id) {
         try {
             Type type = typeRepository.findById(id).get();
             return Result.success(type);
@@ -58,7 +58,7 @@ public class TypeController {
         }
     }
     @DeleteMapping("/delete")
-    public Result<?> deleteByIdTeacher(@RequestParam Long id) {
+    public Result<?> deleteById(@RequestParam Long id) {
         try {
             typeRepository.deleteById(id);
             return Result.success();

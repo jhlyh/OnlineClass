@@ -17,7 +17,7 @@ public class EvaluateLikeController {
         this.evaluateLikeRepository = evaluateLikeRepository;
     }
     @PostMapping("/add")
-    public Result<?> addGrade(@RequestBody EvaluateLike evaluateLike) {
+    public Result<?> add(@RequestBody EvaluateLike evaluateLike) {
         try {
             return Result.success(evaluateLikeRepository.save(evaluateLike));
         } catch (Exception e) {
@@ -25,7 +25,7 @@ public class EvaluateLikeController {
         }
     }
     @PostMapping("update")
-    public Result<?> updateGrade(@RequestBody EvaluateLike evaluateLike) {
+    public Result<?> update(@RequestBody EvaluateLike evaluateLike) {
         try {
             return Result.success(evaluateLikeRepository.save(evaluateLike));
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class EvaluateLikeController {
      * @return
      */
     @GetMapping("/findAll")
-    public Result<?> findAllGrade(
+    public Result<?> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
@@ -49,7 +49,7 @@ public class EvaluateLikeController {
         return Result.success(evaluateLikeRepository.findAll());
     }
     @GetMapping("find")
-    public Result<?> findByIdGrade(@RequestParam Long id) {
+    public Result<?> findById(@RequestParam Long id) {
         try {
             EvaluateLike evaluateLike = evaluateLikeRepository.findById(id).get();
             return Result.success(evaluateLike);
@@ -58,7 +58,7 @@ public class EvaluateLikeController {
         }
     }
     @DeleteMapping("/delete")
-    public Result<?> deleteByIdTeacher(@RequestParam Long id) {
+    public Result<?> deleteById(@RequestParam Long id) {
         try {
             evaluateLikeRepository.deleteById(id);
             return Result.success();

@@ -19,7 +19,7 @@ public class EvaluateController {
     }
 
     @PostMapping("/add")
-    public Result<?> addGrade(@RequestBody Evaluate evaluate) {
+    public Result<?> add(@RequestBody Evaluate evaluate) {
         try {
             return Result.success(evaluateRepository.save(evaluate));
         } catch (Exception e) {
@@ -27,7 +27,7 @@ public class EvaluateController {
         }
     }
     @PostMapping("update")
-    public Result<?> updateGrade(@RequestBody Evaluate evaluate) {
+    public Result<?> update(@RequestBody Evaluate evaluate) {
         try {
             return Result.success(evaluateRepository.save(evaluate));
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class EvaluateController {
      * @return
      */
     @GetMapping("/findAll")
-    public Result<?> findAllGrade(
+    public Result<?> findAll(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
@@ -51,7 +51,7 @@ public class EvaluateController {
         return Result.success(evaluateRepository.findAll());
     }
     @GetMapping("find")
-    public Result<?> findByIdGrade(@RequestParam Long id) {
+    public Result<?> findById(@RequestParam Long id) {
         try {
             Evaluate evaluate = evaluateRepository.findById(id).get();
             return Result.success(evaluate);
@@ -60,7 +60,7 @@ public class EvaluateController {
         }
     }
     @DeleteMapping("/delete")
-    public Result<?> deleteByIdTeacher(@RequestParam Long id) {
+    public Result<?> deleteById(@RequestParam Long id) {
         try {
             evaluateRepository.deleteById(id);
             return Result.success();
