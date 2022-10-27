@@ -59,7 +59,7 @@ public class User implements Serializable {
      *
      */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("user")
+    @JsonIgnoreProperties({"user", "aGrade"})
     private List<UserGrade> grades;
 
     /** 与管理班级为一对多关系（如果是班主任）
@@ -73,21 +73,21 @@ public class User implements Serializable {
      *
      */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("user")
+    @JsonIgnore
     private List<Evaluate> evaluates;
 
     /** 与笔记为一对多关系
      *
      */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("user")
+    @JsonIgnoreProperties({"noteLikes", "chapter", "user"})
     private List<Note> notes;
 
     /** 与学习记录为一对多关系
      *
      */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("user")
+    @JsonIgnoreProperties({"user", "chapter"})
     private List<StudyLog> studyLogs;
 
     /** 与笔记点赞为多对一关系
@@ -99,15 +99,18 @@ public class User implements Serializable {
             joinColumns = @JoinColumn(name = "user"),
             inverseJoinColumns = @JoinColumn(name = "note_like")
     )
-    @JsonIgnoreProperties("users")
+    @JsonIgnore
     private NoteLike noteLike;
 
+    /** 与评价点赞为多对一关系
+     *
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_evaluate_like",
             joinColumns = @JoinColumn(name = "user"),
             inverseJoinColumns = @JoinColumn(name = "evaluate_like")
     )
-    @JsonIgnoreProperties("users")
+    @JsonIgnore
     private EvaluateLike evaluateLike;
 }

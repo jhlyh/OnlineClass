@@ -1,5 +1,6 @@
 package com.example.onlineclass.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -36,7 +37,7 @@ public class Grade implements Serializable {
      *
      */
     @OneToMany(mappedBy = "aGrade", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("aGrade")
+    @JsonIgnoreProperties({"aGrade"})
     private List<UserGrade> userGrades;
 
     /** 与班主任为多对一关系
@@ -48,6 +49,6 @@ public class Grade implements Serializable {
             joinColumns = @JoinColumn(name = "grade"),
             inverseJoinColumns = @JoinColumn(name = "headteacher")
     )
-    @JsonIgnoreProperties("manageGrades")
+    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades","notes", "studyLogs", "noteLike", "evaluateLike"})
     private User headteacher;
 }

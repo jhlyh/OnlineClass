@@ -41,7 +41,7 @@ public class StudyLog implements Serializable {
             joinColumns = @JoinColumn(name = "study_log"),
             inverseJoinColumns = @JoinColumn(name = "chapter")
     )
-    @JsonIgnoreProperties("studyLogs")
+    @JsonIgnoreProperties({"course", "notes"})
     private Chapter chapter;
 
     /** 与用户为多对一关系
@@ -53,6 +53,6 @@ public class StudyLog implements Serializable {
             joinColumns = @JoinColumn(name = "study_log"),
             inverseJoinColumns = @JoinColumn(name = "user")
     )
-    @JsonIgnoreProperties("studyLogs")
+    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades","notes", "studyLogs", "noteLike", "evaluateLike"})
     private User user;
 }

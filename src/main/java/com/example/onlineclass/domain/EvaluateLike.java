@@ -37,7 +37,7 @@ public class EvaluateLike implements Serializable {
      *
      */
     @OneToMany(mappedBy = "evaluateLike")
-    @JsonIgnoreProperties("evaluateLike")
+    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades","notes", "studyLogs", "noteLike", "evaluateLike"})
     private List<User> users;
 
     /**与评价为多对一关系
@@ -49,7 +49,7 @@ public class EvaluateLike implements Serializable {
             joinColumns = @JoinColumn(name = "evaluate_like"),
             inverseJoinColumns = @JoinColumn(name = "evaluate")
     )
-    @JsonIgnoreProperties("evaluateLikes")
+    @JsonIgnoreProperties({"evaluateLikes", "user", "course"})
     private Evaluate evaluate;
 
 }

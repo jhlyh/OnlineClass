@@ -44,22 +44,21 @@ public class Chapter implements Serializable {
      *
      */
     @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("chapter")
+    @JsonIgnore
     private List<StudyLog> studyLogs;
 
     /**与学习笔记为一对多关系，且章节具有级联权力
      *
      */
     @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("chapter")
+    @JsonIgnoreProperties({"noteLikes", "chapter", "user"})
     private List<Note> notes;
 
     /** 与课程为多对一关系,在JSON中忽略课程的本身，为关系维护方
      *
      */
     @ManyToOne
-    /*@JsonIgnoreProperties("chapters")*/
-    @JsonIgnore
+    @JsonIgnoreProperties({"teacher", "type", "evaluates", "chapters", })
     @JoinTable(
             name = "course_chapter",
             joinColumns = @JoinColumn(name = "chapter"),

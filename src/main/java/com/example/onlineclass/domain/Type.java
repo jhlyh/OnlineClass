@@ -32,6 +32,6 @@ public class Type implements Serializable {
      *
      */
     @OneToMany(mappedBy = "type")
-    @JsonIgnore
+    @JsonIgnoreProperties({"teacher", "type", "evaluates", "chapters", })
     private List<Course> courses;
 }
