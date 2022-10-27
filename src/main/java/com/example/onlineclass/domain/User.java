@@ -21,7 +21,14 @@ import java.util.List;
  * @phone 电话
  * @email 邮箱
  * @openid 微信的openid
- * @teacher 如果有老师
+ * @teacher 如果有老师就对应一个用户
+ * @grades 用户所属的班级
+ * @manageGrades 如果用户是班主任，这是其对应的班级
+ * @evaluates 用户发表的评价
+ * @notes 用户发表的笔记
+ * @studyLogs 用户的学习记录
+ * @noteLike 用户对笔记的点赞
+ * @evaluateLike 用户对评价的点赞
  */
 @Data
 @Entity
@@ -41,33 +48,51 @@ public class User implements Serializable {
     private String email;
     private String openid;
 
+    /** 与老师为一对一关系
+     *
+     */
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private Teacher teacher;
 
+    /** 与班级为一对多关系
+     *
+     */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<UserGrade> grades;
 
+    /** 与管理班级为一对多关系（如果是班主任）
+     *
+     */
     @OneToMany(mappedBy = "headteacher")
     @JsonIgnore
     private List<Grade> manageGrades;
 
+    /** 与评价为一对多关系
+     *
+     */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<Evaluate> evaluates;
 
-
+    /** 与笔记为一对多关系
+     *
+     */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<Note> notes;
 
-
+    /** 与学习记录为一对多关系
+     *
+     */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<StudyLog> studyLogs;
 
-
+    /** 与笔记点赞为多对一关系
+     *
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_note_like",
