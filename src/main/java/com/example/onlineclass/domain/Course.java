@@ -1,7 +1,6 @@
 package com.example.onlineclass.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -57,22 +56,22 @@ public class Course implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
-    /** 与章节为一对多关系，具有级联权力
-     *
+    /**
+     * 与章节为一对多关系，具有级联权力
      */
     @JsonIgnoreProperties({"course", "notes"})
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Chapter> chapters;
 
-    /** 与课程评价为一对多关系，具有级联权力
-     *
+    /**
+     * 与课程评价为一对多关系，具有级联权力
      */
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"course", "user", "evaluateLikes"})
     private List<Evaluate> evaluates;
 
-    /** 与课程类型为多对一关系
-     *
+    /**
+     * 与课程类型为多对一关系
      */
     @ManyToOne
     @JoinTable(
@@ -83,8 +82,8 @@ public class Course implements Serializable {
     @JsonIgnoreProperties({"courses"})
     private Type type;
 
-    /** 与授课老师为多对一关系
-     *
+    /**
+     * 与授课老师为多对一关系
      */
     @ManyToOne
     @JsonIgnoreProperties({"courses", "user"})

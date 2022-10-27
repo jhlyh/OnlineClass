@@ -33,15 +33,15 @@ public class EvaluateLike implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    /** 与用户为一对多关系
-     *
+    /**
+     * 与用户为一对多关系
      */
     @OneToMany(mappedBy = "evaluateLike")
-    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades","notes", "studyLogs", "noteLike", "evaluateLike"})
+    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades", "notes", "studyLogs", "noteLike", "evaluateLike"})
     private List<User> users;
 
-    /**与评价为多对一关系
-     *
+    /**
+     * 与评价为多对一关系
      */
     @ManyToOne
     @JoinTable(

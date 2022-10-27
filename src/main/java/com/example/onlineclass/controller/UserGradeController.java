@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/userGrade")
 public class UserGradeController {
-    private UserGradeRepository userGradeRepository;
+    private final UserGradeRepository userGradeRepository;
+
     public UserGradeController(UserGradeRepository userGradeRepository) {
         this.userGradeRepository = userGradeRepository;
     }
+
     @PostMapping("/add")
     public Result<?> add(@RequestBody UserGrade userGrade) {
         try {
@@ -23,6 +25,7 @@ public class UserGradeController {
             return Result.error("出错啦", e.toString());
         }
     }
+
     @PostMapping("update")
     public Result<?> update(@RequestBody UserGrade userGrade) {
         try {
@@ -34,6 +37,7 @@ public class UserGradeController {
 
     /**
      * 未完成
+     *
      * @param page
      * @param size
      * @param sort
@@ -47,6 +51,7 @@ public class UserGradeController {
     ) {
         return Result.success(userGradeRepository.findAll());
     }
+
     @GetMapping("find")
     public Result<?> findById(@RequestParam Long id) {
         try {
@@ -56,6 +61,7 @@ public class UserGradeController {
             return Result.error("出错啦", e.toString());
         }
     }
+
     @DeleteMapping("/delete")
     public Result<?> deleteById(@RequestParam Long id) {
         try {

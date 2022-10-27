@@ -48,50 +48,50 @@ public class User implements Serializable {
     private String email;
     private String openid;
 
-    /** 与老师为一对一关系
-     *
+    /**
+     * 与老师为一对一关系
      */
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private Teacher teacher;
 
-    /** 与班级为一对多关系
-     *
+    /**
+     * 与班级为一对多关系
      */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"user", "aGrade"})
     private List<UserGrade> grades;
 
-    /** 与管理班级为一对多关系（如果是班主任）
-     *
+    /**
+     * 与管理班级为一对多关系（如果是班主任）
      */
     @OneToMany(mappedBy = "headteacher")
     @JsonIgnore
     private List<Grade> manageGrades;
 
-    /** 与评价为一对多关系
-     *
+    /**
+     * 与评价为一对多关系
      */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Evaluate> evaluates;
 
-    /** 与笔记为一对多关系
-     *
+    /**
+     * 与笔记为一对多关系
      */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"noteLikes", "chapter", "user"})
     private List<Note> notes;
 
-    /** 与学习记录为一对多关系
-     *
+    /**
+     * 与学习记录为一对多关系
      */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"user", "chapter"})
     private List<StudyLog> studyLogs;
 
-    /** 与笔记点赞为多对一关系
-     *
+    /**
+     * 与笔记点赞为多对一关系
      */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
@@ -102,8 +102,8 @@ public class User implements Serializable {
     @JsonIgnore
     private NoteLike noteLike;
 
-    /** 与评价点赞为多对一关系
-     *
+    /**
+     * 与评价点赞为多对一关系
      */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(

@@ -38,15 +38,15 @@ public class Evaluate implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    /** 与评价点赞为一对多关系，拥有级联权力
-     *
+    /**
+     * 与评价点赞为一对多关系，拥有级联权力
      */
     @OneToMany(mappedBy = "evaluate", cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"evaluate", "users"})
     private List<EvaluateLike> evaluateLikes;
 
-    /** 与课程为多对一关系
-     *
+    /**
+     * 与课程为多对一关系
      */
     @ManyToOne
     @JoinTable(
@@ -57,8 +57,8 @@ public class Evaluate implements Serializable {
     @JsonIgnoreProperties({"evaluates", "chapters", "type", "teacher"})
     private Course course;
 
-    /** 与用户为多对一关系
-     *
+    /**
+     * 与用户为多对一关系
      */
     @ManyToOne
     @JoinTable(
@@ -66,6 +66,6 @@ public class Evaluate implements Serializable {
             joinColumns = @JoinColumn(name = "evaluate"),
             inverseJoinColumns = @JoinColumn(name = "user")
     )
-    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades","notes", "studyLogs", "noteLike", "evaluateLike"})
+    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades", "notes", "studyLogs", "noteLike", "evaluateLike"})
     private User user;
 }

@@ -37,15 +37,15 @@ public class Note implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    /** 与笔记点赞为一对多关系
-     *
+    /**
+     * 与笔记点赞为一对多关系
      */
     @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"note", "users"})
     private List<NoteLike> noteLikes;
 
-    /** 与章节为多对一关系
-     *
+    /**
+     * 与章节为多对一关系
      */
     @ManyToOne
     @JoinTable(
@@ -56,8 +56,8 @@ public class Note implements Serializable {
     @JsonIgnoreProperties({"course", "notes"})
     private Chapter chapter;
 
-    /** 与用户为多对一关系
-     *
+    /**
+     * 与用户为多对一关系
      */
     @ManyToOne
     @JoinTable(
@@ -65,7 +65,7 @@ public class Note implements Serializable {
             joinColumns = @JoinColumn(name = "note"),
             inverseJoinColumns = @JoinColumn(name = "user")
     )
-    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades","notes", "studyLogs", "noteLike", "evaluateLike"})
+    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades", "notes", "studyLogs", "noteLike", "evaluateLike"})
     private User user;
 
 }

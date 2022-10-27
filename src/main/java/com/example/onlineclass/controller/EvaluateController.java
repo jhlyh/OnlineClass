@@ -1,8 +1,8 @@
 package com.example.onlineclass.controller;
 
 import com.example.onlineclass.domain.Evaluate;
-import com.example.onlineclass.domain.Grade;
 import com.example.onlineclass.repository.EvaluateRepository;
+import com.example.onlineclass.service.EvaluateDetailImp;
 import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/evaluate")
 public class EvaluateController {
-    private EvaluateRepository evaluateRepository;
+    private final EvaluateRepository evaluateRepository;
+    private final EvaluateDetailImp evaluateDetailImp;
 
-    public EvaluateController(EvaluateRepository evaluateRepository) {
+
+    public EvaluateController(EvaluateRepository evaluateRepository, EvaluateDetailImp evaluateDetailImp) {
         this.evaluateRepository = evaluateRepository;
+        this.evaluateDetailImp = evaluateDetailImp;
     }
 
     @PostMapping("/add")
@@ -26,6 +29,7 @@ public class EvaluateController {
             return Result.error("出错啦", e.toString());
         }
     }
+
     @PostMapping("update")
     public Result<?> update(@RequestBody Evaluate evaluate) {
         try {
@@ -35,21 +39,16 @@ public class EvaluateController {
         }
     }
 
-    /**
-     * 未完成
-     * @param page
-     * @param size
-     * @param sort
-     * @return
-     */
     @GetMapping("/findAll")
     public Result<?> findAll(
+            @RequestParam Long courseId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
-        return Result.success(evaluateRepository.findAll());
+        return Result.success(evaluateDetailImp.getAllEvaluatePage(courseId, page, size, sort));
     }
+
     @GetMapping("find")
     public Result<?> findById(@RequestParam Long id) {
         try {
@@ -59,6 +58,7 @@ public class EvaluateController {
             return Result.error("出错啦", e.toString());
         }
     }
+
     @DeleteMapping("/delete")
     public Result<?> deleteById(@RequestParam Long id) {
         try {

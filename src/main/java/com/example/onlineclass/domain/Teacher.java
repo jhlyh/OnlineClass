@@ -44,8 +44,8 @@ public class Teacher implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
-    /** 与用户为一对一关系
-     *
+    /**
+     * 与用户为一对一关系
      */
     @OneToOne
     @JoinTable(
@@ -53,13 +53,13 @@ public class Teacher implements Serializable {
             joinColumns = @JoinColumn(name = "teacher"),
             inverseJoinColumns = @JoinColumn(name = "user")
     )
-    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades","notes", "studyLogs", "noteLike", "evaluateLike"})
+    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades", "notes", "studyLogs", "noteLike", "evaluateLike"})
     private User user;
 
-    /** 与课程为一对多关系
-     *
+    /**
+     * 与课程为一对多关系
      */
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"teacher", "type", "evaluates", "chapters", })
+    @JsonIgnoreProperties({"teacher", "type", "evaluates", "chapters",})
     private List<Course> courses;
 }

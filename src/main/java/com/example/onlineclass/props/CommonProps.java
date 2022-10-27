@@ -18,4 +18,5 @@ public class CommonProps {
     private String nginxPath = "http://114.132.251.197:888/";
     private String frontEndError = "4xx";
     private String AfterEndError = "5xx";
+
 }

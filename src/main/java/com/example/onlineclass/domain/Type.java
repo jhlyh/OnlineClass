@@ -1,6 +1,5 @@
 package com.example.onlineclass.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -28,10 +27,10 @@ public class Type implements Serializable {
     private final Long id;
     private String name;
 
-    /** 与课程为一对多关系
-     *
+    /**
+     * 与课程为一对多关系
      */
     @OneToMany(mappedBy = "type")
-    @JsonIgnoreProperties({"teacher", "type", "evaluates", "chapters", })
+    @JsonIgnoreProperties({"teacher", "type", "evaluates", "chapters",})
     private List<Course> courses;
 }

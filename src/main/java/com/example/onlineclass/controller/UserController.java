@@ -1,6 +1,5 @@
 package com.example.onlineclass.controller;
 
-import com.example.onlineclass.domain.Grade;
 import com.example.onlineclass.domain.User;
 import com.example.onlineclass.repository.UserRepository;
 import com.example.onlineclass.util.Result;
@@ -12,10 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     @PostMapping("/add")
     public Result<?> add(@RequestBody User user) {
         try {
@@ -24,6 +25,7 @@ public class UserController {
             return Result.error("出错啦", e.toString());
         }
     }
+
     @PostMapping("update")
     public Result<?> update(@RequestBody User user) {
         try {
@@ -35,6 +37,7 @@ public class UserController {
 
     /**
      * 未完成
+     *
      * @param page
      * @param size
      * @param sort
@@ -48,6 +51,7 @@ public class UserController {
     ) {
         return Result.success(userRepository.findAll());
     }
+
     @GetMapping("find")
     public Result<?> findById(@RequestParam Long id) {
         try {
@@ -57,6 +61,7 @@ public class UserController {
             return Result.error("出错啦", e.toString());
         }
     }
+
     @DeleteMapping("/delete")
     public Result<?> deleteById(@RequestParam Long id) {
         try {

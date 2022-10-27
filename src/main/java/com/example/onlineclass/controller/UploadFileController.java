@@ -16,8 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/common")
 public class UploadFileController {
 
-    private CommonDetailImp commonDetailImp;
-    private CommonProps commonProps;
+    private final CommonDetailImp commonDetailImp;
+    private final CommonProps commonProps;
 
     public UploadFileController(CommonDetailImp commonDetailImp, CommonProps commonProps) {
         this.commonDetailImp = commonDetailImp;

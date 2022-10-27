@@ -2,7 +2,6 @@ package com.example.onlineclass.service;
 
 import com.example.onlineclass.props.CommonProps;
 import com.example.onlineclass.props.Props;
-import com.example.onlineclass.domain.Course;
 import com.example.onlineclass.util.Result;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +22,8 @@ import java.util.*;
 @Service
 public class CommonDetailImp implements CommonDetail {
 
-    private CommonProps commonProps;
+    private final CommonProps commonProps;
+
     public CommonDetailImp(CommonProps commonProps) {
         this.commonProps = commonProps;
     }
@@ -69,15 +69,15 @@ public class CommonDetailImp implements CommonDetail {
                 orders.add(new Sort.Order(Sort.Direction.fromString(sort[props.getSortDirectionIndex()]), sort[props.getTheSortByIndex()]));
             }
             Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
-            Page<Course> coursePage;
-            coursePage = jpaRepository.findAll(pageable);
-            List<Course> courses = coursePage.getContent();
+            Page<Object> aPage;
+            aPage = jpaRepository.findAll(pageable);
+            List<Object> objects = aPage.getContent();
 
             Map<String, Object> response = new HashMap<>();
-            response.put(props.getReturnDomain(), courses);
-            response.put(props.getReturnCurrentPage(), coursePage.getNumber());
-            response.put(props.getReturnTotalPages(), coursePage.getTotalPages());
-            response.put(props.getReturnTotalItems(), coursePage.getTotalElements());
+            response.put(props.getReturnDomain(), objects);
+            response.put(props.getReturnCurrentPage(), aPage.getNumber());
+            response.put(props.getReturnTotalPages(), aPage.getTotalPages());
+            response.put(props.getReturnTotalItems(), aPage.getTotalElements());
             return response;
 
         } catch (Exception e) {

@@ -9,9 +9,10 @@ import java.util.Map;
 @Service
 public class TeacherDetailImp implements TeacherDetail {
 
-    private TeacherRepository teacherRepository;
-    private TeacherProps teacherProps;
-    private CommonDetailImp commonDetailImp;
+    private final TeacherRepository teacherRepository;
+    private final TeacherProps teacherProps;
+    private final CommonDetailImp commonDetailImp;
+
     public TeacherDetailImp(TeacherRepository teacherRepository, TeacherProps teacherProps, CommonDetailImp commonDetailImp) {
         this.teacherRepository = teacherRepository;
         this.teacherProps = teacherProps;

@@ -1,6 +1,5 @@
 package com.example.onlineclass.controller;
 
-import com.example.onlineclass.domain.Grade;
 import com.example.onlineclass.domain.Type;
 import com.example.onlineclass.repository.TypeRepository;
 import com.example.onlineclass.util.Result;
@@ -12,10 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/type")
 public class TypeController {
-    private TypeRepository typeRepository;
-    public TypeController(TypeRepository typeRepository){
+    private final TypeRepository typeRepository;
+
+    public TypeController(TypeRepository typeRepository) {
         this.typeRepository = typeRepository;
     }
+
     @PostMapping("/add")
     public Result<?> add(@RequestBody Type type) {
         try {
@@ -24,6 +25,7 @@ public class TypeController {
             return Result.error("出错啦", e.toString());
         }
     }
+
     @PostMapping("update")
     public Result<?> update(@RequestBody Type type) {
         try {
@@ -35,6 +37,7 @@ public class TypeController {
 
     /**
      * 未完成
+     *
      * @param page
      * @param size
      * @param sort
@@ -48,6 +51,7 @@ public class TypeController {
     ) {
         return Result.success(typeRepository.findAll());
     }
+
     @GetMapping("find")
     public Result<?> findById(@RequestParam Long id) {
         try {
@@ -57,6 +61,7 @@ public class TypeController {
             return Result.error("出错啦", e.toString());
         }
     }
+
     @DeleteMapping("/delete")
     public Result<?> deleteById(@RequestParam Long id) {
         try {

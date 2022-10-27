@@ -1,7 +1,7 @@
 package com.example.onlineclass.controller;
 
-import com.example.onlineclass.props.CommonProps;
 import com.example.onlineclass.domain.Course;
+import com.example.onlineclass.props.CommonProps;
 import com.example.onlineclass.repository.CourseRepository;
 import com.example.onlineclass.service.CourseDetailImp;
 import com.example.onlineclass.util.Result;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/course")
 public class CourseController {
 
-    private CourseRepository courseRepository;
-    private CourseDetailImp courseDetailImp;
-    private CommonProps commonProps;
+    private final CourseRepository courseRepository;
+    private final CourseDetailImp courseDetailImp;
+    private final CommonProps commonProps;
 
 
     public CourseController(CourseRepository courseRepository, CourseDetailImp courseDetailImp, CommonProps commonProps) {

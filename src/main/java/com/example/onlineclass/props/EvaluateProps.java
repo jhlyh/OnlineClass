@@ -3,10 +3,10 @@ package com.example.onlineclass.props;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-@Component
 @Data
-public class CourseProps implements Props {
-    private String returnDomain = "courses";
+@Component
+public class EvaluateProps implements Props {
+    private String returnDomain = "evaluates";
     private Integer sortDirectionIndex = 1;
     private Integer theSortByIndex = 0;
     private String returnCurrentPage = "currentPage";

@@ -32,8 +32,8 @@ public class StudyLog implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    /** 与章节为多对一关系
-     *
+    /**
+     * 与章节为多对一关系
      */
     @ManyToOne
     @JoinTable(
@@ -44,8 +44,8 @@ public class StudyLog implements Serializable {
     @JsonIgnoreProperties({"course", "notes"})
     private Chapter chapter;
 
-    /** 与用户为多对一关系
-     *
+    /**
+     * 与用户为多对一关系
      */
     @ManyToOne
     @JoinTable(
@@ -53,6 +53,6 @@ public class StudyLog implements Serializable {
             joinColumns = @JoinColumn(name = "study_log"),
             inverseJoinColumns = @JoinColumn(name = "user")
     )
-    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades","notes", "studyLogs", "noteLike", "evaluateLike"})
+    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades", "notes", "studyLogs", "noteLike", "evaluateLike"})
     private User user;
 }

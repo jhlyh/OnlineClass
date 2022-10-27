@@ -1,7 +1,7 @@
 package com.example.onlineclass.controller;
 
-import com.example.onlineclass.props.CommonProps;
 import com.example.onlineclass.domain.Chapter;
+import com.example.onlineclass.props.CommonProps;
 import com.example.onlineclass.repository.ChapterRepository;
 import com.example.onlineclass.service.ChapterDetailImp;
 import com.example.onlineclass.util.Result;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/section")
 public class ChapterController {
-    private ChapterRepository chapterRepository;
-    private ChapterDetailImp chapterDetailImp;
-    private CommonProps commonProps;
+    private final ChapterRepository chapterRepository;
+    private final ChapterDetailImp chapterDetailImp;
+    private final CommonProps commonProps;
 
     public ChapterController(ChapterRepository chapterRepository, ChapterDetailImp chapterDetailImp, CommonProps commonProps) {
         this.chapterRepository = chapterRepository;

@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/** 多对多关系表
+/**
+ * 多对多关系表
+ *
  * @author jhlyh
  * @id 大学班id
  * @isHeadTeacher 是否班主任，0不是，1是
@@ -27,8 +29,8 @@ public class UserGrade implements Serializable {
     private final Long id;
     private Integer isHeadTeacher;
 
-    /** 大学班与用户为多对一关系
-     *
+    /**
+     * 大学班与用户为多对一关系
      */
     @ManyToOne
     @JoinTable(
@@ -36,11 +38,11 @@ public class UserGrade implements Serializable {
             joinColumns = @JoinColumn(name = "user_grade"),
             inverseJoinColumns = @JoinColumn(name = "user")
     )
-    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades","notes", "studyLogs", "noteLike", "evaluateLike"})
+    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades", "notes", "studyLogs", "noteLike", "evaluateLike"})
     private User user;
 
-    /** 大学班与班级为多对一关系
-     *
+    /**
+     * 大学班与班级为多对一关系
      */
     @ManyToOne
     @JoinTable(

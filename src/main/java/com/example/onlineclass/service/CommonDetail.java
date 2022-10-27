@@ -12,5 +12,6 @@ import java.util.Map;
  */
 public interface CommonDetail {
     Result<?> uploadFile(MultipartFile multipartFile, String path);
+
     Map<String, Object> getAllPage(int page, int size, String[] sort, JpaRepository jpaRepository, Props props);
 }
