@@ -35,11 +35,11 @@ public class Grade implements Serializable {
     @JsonIgnoreProperties("aGrade")
     private List<UserGrade> userGrades;
 
-/*    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinTable(
             name = "headTeacher_grade",
             joinColumns = @JoinColumn(name = "grade"),
             inverseJoinColumns = @JoinColumn(name = "headteacher")
     )
-    private User headteacher;*/
+    private User headteacher;
 }

@@ -48,9 +48,9 @@ public class User implements Serializable {
     @JsonIgnoreProperties("user")
     private List<UserGrade> grades;
 
-/*    @OneToMany
+    @OneToMany(mappedBy = "headteacher")
     @JsonIgnore
-    private List<Grade> manageGrades;*/
+    private List<Grade> manageGrades;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
