@@ -1,8 +1,10 @@
 package com.example.onlineclass.controller;
 
+import com.example.onlineclass.domain.Grade;
+import com.example.onlineclass.domain.User;
 import com.example.onlineclass.repository.UserRepository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.onlineclass.util.Result;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author jhlyh
@@ -11,4 +13,57 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
     private UserRepository userRepository;
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+    @PostMapping("/add")
+    public Result<?> addGrade(@RequestBody User user) {
+        try {
+            return Result.success(userRepository.save(user));
+        } catch (Exception e) {
+            return Result.error("出错啦", e.toString());
+        }
+    }
+    @PostMapping("update")
+    public Result<?> updateGrade(@RequestBody User user) {
+        try {
+            return Result.success(userRepository.save(user));
+        } catch (Exception e) {
+            return Result.error("出错啦", e.toString());
+        }
+    }
+
+    /**
+     * 未完成
+     * @param page
+     * @param size
+     * @param sort
+     * @return
+     */
+    @GetMapping("/findAll")
+    public Result<?> findAllGrade(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "id,desc") String[] sort
+    ) {
+        return Result.success(userRepository.findAll());
+    }
+    @GetMapping("find")
+    public Result<?> findByIdGrade(@RequestParam Long id) {
+        try {
+            User user = userRepository.findById(id).get();
+            return Result.success(user);
+        } catch (Exception e) {
+            return Result.error("出错啦", e.toString());
+        }
+    }
+    @DeleteMapping("/delete")
+    public Result<?> deleteByIdTeacher(@RequestParam Long id) {
+        try {
+            userRepository.deleteById(id);
+            return Result.success();
+        } catch (Exception e) {
+            return Result.error("出错啦", e.toString());
+        }
+    }
 }
