@@ -39,14 +39,14 @@ public class Chapter implements Serializable {
     private String info;
     private Integer sort;
 
-    /** 与学习记录为一对多关系，且章节具有级联权力，采用外表方式存储其关系，为保证返回结果不产生嵌套，在JSON中省略学习记录的自身
+    /** 与学习记录为一对多关系，且章节具有级联权力
      *
      */
     @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("chapter")
     private List<StudyLog> studyLogs;
 
-    /**与学习笔记为一对多关系，且章节具有级联权力，采用外表方式存储其关系，为保证返回结果不产生嵌套，在JSON中忽略学习记录的自身
+    /**与学习笔记为一对多关系，且章节具有级联权力
      *
      */
     @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL)

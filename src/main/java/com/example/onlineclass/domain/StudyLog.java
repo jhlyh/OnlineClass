@@ -14,8 +14,10 @@ import java.util.Date;
 
 /**
  * @author jhlyh
- * @id 学习记录id;
- * @创建时间
+ * @id 学习记录id
+ * @createTime 创建时间
+ * @chapter 该学习记录的章节
+ * @user 该学习记录的用户
  */
 @Data
 @Entity
@@ -30,6 +32,9 @@ public class StudyLog implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
+    /** 与章节为多对一关系
+     *
+     */
     @ManyToOne
     @JoinTable(
             name = "chapter_log",
@@ -39,6 +44,9 @@ public class StudyLog implements Serializable {
     @JsonIgnoreProperties("studyLogs")
     private Chapter chapter;
 
+    /** 与用户为多对一关系
+     *
+     */
     @ManyToOne
     @JoinTable(
             name = "user_study_log",

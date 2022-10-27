@@ -56,21 +56,21 @@ public class Course implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
-    /** 与章节为一对多关系，具有级联权力，JSON忽略章节其中的自身
+    /** 与章节为一对多关系，具有级联权力
      *
      */
     @JsonIgnoreProperties("course")
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Chapter> chapters;
 
-    /** 与课程评价为一对多关系，具有级联权力，JSON忽略章节其中的自身
+    /** 与课程评价为一对多关系，具有级联权力
      *
      */
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("course")
     private List<Evaluate> evaluates;
 
-    /** 与课程类型为多对一关系，必须类型，JSON忽略type中的自身
+    /** 与课程类型为多对一关系
      *
      */
     @ManyToOne
@@ -82,7 +82,7 @@ public class Course implements Serializable {
     @JsonIgnoreProperties("courses")
     private Type type;
 
-    /** 与授课老师为多对一关系，必须类型，JSON忽略teacher中的自身
+    /** 与授课老师为多对一关系
      *
      */
     @ManyToOne
@@ -93,5 +93,4 @@ public class Course implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "teacher")
     )
     private Teacher teacher;
-
 }

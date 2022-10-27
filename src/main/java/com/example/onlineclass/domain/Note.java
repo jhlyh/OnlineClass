@@ -18,6 +18,9 @@ import java.util.List;
  * @id 笔记id
  * @content 内容
  * @createTime 创建时间
+ * @noteLikes 笔记的点赞
+ * @chapter 章节
+ * @user 写笔记的用户
  */
 @Data
 @Entity
@@ -34,11 +37,16 @@ public class Note implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-
+    /** 与笔记点赞为一对多关系
+     *
+     */
     @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("note")
     private List<NoteLike> noteLikes;
 
+    /** 与章节为多对一关系
+     *
+     */
     @ManyToOne
     @JoinTable(
             name = "chapter_note",
@@ -48,6 +56,9 @@ public class Note implements Serializable {
     @JsonIgnoreProperties("notes")
     private Chapter chapter;
 
+    /** 与用户为多对一关系
+     *
+     */
     @ManyToOne
     @JoinTable(
             name = "user_notes",

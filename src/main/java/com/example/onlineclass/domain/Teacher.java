@@ -22,6 +22,7 @@ import java.util.List;
  * @createTime 创建时间
  * @updateTime 更新时间
  * @courses 所授课程
+ * @user 老师所属的用户
  */
 @Data
 @Entity
@@ -43,6 +44,9 @@ public class Teacher implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
+    /** 与用户为一对一关系
+     *
+     */
     @OneToOne
     @JoinTable(
             name = "user_teacher",
@@ -51,9 +55,10 @@ public class Teacher implements Serializable {
     )
     private User user;
 
+    /** 与课程为一对多关系
+     *
+     */
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("teacher")
     private List<Course> courses;
-
-
 }

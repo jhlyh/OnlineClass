@@ -21,6 +21,7 @@ import java.util.List;
  * @phone 电话
  * @email 邮箱
  * @openid 微信的openid
+ * @teacher 如果有老师
  */
 @Data
 @Entity

@@ -17,6 +17,7 @@ import java.util.List;
  * @headteacher 班主任（对应user）
  * @atmosphere 班训
  * @coverUrl 封面
+ * @userGrades 班级的同学表
  */
 @Data
 @Entity
@@ -31,10 +32,16 @@ public class Grade implements Serializable {
     private String atmosphere;
     private String coverUrl;
 
+    /** 与用户表为一对多关系
+     *
+     */
     @OneToMany(mappedBy = "aGrade", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("aGrade")
     private List<UserGrade> userGrades;
 
+    /** 与班主任为多对一关系
+     *
+     */
     @ManyToOne
     @JoinTable(
             name = "headTeacher_grade",

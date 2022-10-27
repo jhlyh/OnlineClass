@@ -15,6 +15,7 @@ import java.util.List;
  * @author jhlyh
  * @id 课程性质id
  * @name 性质名称
+ * @courses 该类型的课程
  */
 @Data
 @Entity
@@ -27,6 +28,9 @@ public class Type implements Serializable {
     private final Long id;
     private String name;
 
+    /** 与课程为一对多关系
+     *
+     */
     @OneToMany(mappedBy = "type")
     @JsonIgnore
     private List<Course> courses;

@@ -38,14 +38,14 @@ public class Evaluate implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    /** 与评价点赞为一对多关系，拥有级联权力，JSON忽略点赞中的自身
+    /** 与评价点赞为一对多关系，拥有级联权力
      *
      */
     @OneToMany(mappedBy = "evaluate", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("evaluate")
     private List<EvaluateLike> evaluateLikes;
 
-    /** 与课程为多对一关系，必须类型，JSON忽略课程其中的自身
+    /** 与课程为多对一关系
      *
      */
     @ManyToOne
@@ -57,7 +57,7 @@ public class Evaluate implements Serializable {
     @JsonIgnoreProperties("evaluates")
     private Course course;
 
-    /** 与用户为多对一关系，必须类型，JSON忽略其中自身
+    /** 与用户为多对一关系
      *
      */
     @ManyToOne

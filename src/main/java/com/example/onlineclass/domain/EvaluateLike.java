@@ -17,6 +17,8 @@ import java.util.List;
  * @author jhlyh
  * @id 课程评价点赞id
  * @createTime 创建时间
+ * @users 点赞人
+ * @evaluate 点赞的评价
  */
 @Data
 @Entity
@@ -31,10 +33,16 @@ public class EvaluateLike implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
+    /** 与用户为一对多关系
+     *
+     */
     @OneToMany(mappedBy = "evaluateLike")
     @JsonIgnoreProperties("evaluateLike")
     private List<User> users;
 
+    /**与评价为多对一关系
+     *
+     */
     @ManyToOne
     @JoinTable(
             name = "evaluate_evaluate_like",

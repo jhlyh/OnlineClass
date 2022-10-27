@@ -17,6 +17,8 @@ import java.util.List;
  * @author jhlyh
  * @id 笔记点赞id
  * @createTime 创建时间
+ * @users 给笔记点赞的用户
+ * @note 点赞的笔记
  */
 @Data
 @Entity
@@ -31,10 +33,16 @@ public class NoteLike implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
+    /** 与用户为一对多关系
+     *
+     */
     @OneToMany(mappedBy = "noteLike")
     @JsonIgnoreProperties("noteLike")
     private List<User> users;
 
+    /** 与笔记为多对一关系
+     *
+     */
     @ManyToOne
     @JoinTable(
             name = "note_note_like",
@@ -43,6 +51,4 @@ public class NoteLike implements Serializable {
     )
     @JsonIgnoreProperties("noteLikes")
     private Note note;
-
-
 }
