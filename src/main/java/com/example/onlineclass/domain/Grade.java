@@ -25,7 +25,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
-public class Class implements Serializable {
+public class Grade implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private final Long id;
@@ -33,7 +33,7 @@ public class Class implements Serializable {
     private String atmosphere;
     private String coverUrl;
 
-    @OneToMany(mappedBy = "aClass", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("aClass")
-    private List<UserClass> userClasses;
+    @OneToMany(mappedBy = "aGrade", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("aGrade")
+    private List<UserGrade> userGrades;
 }

@@ -1,10 +1,12 @@
 package com.example.onlineclass.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -29,36 +31,31 @@ import java.util.List;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
-public class Course implements Serializable{
+public class Course implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final Long id;
-
+    protected Integer view;
     private String name;
     private Integer Type;
     private String coverUrl;
     private Integer period;
     private String introduction;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
-    protected Integer view;
 
-    @ManyToOne(optional = false)
-    @JsonIgnoreProperties("courses")
-    @JoinTable(
-            name = "teacher_course",
-            joinColumns = @JoinColumn(name = "course"),
-            inverseJoinColumns = @JoinColumn(name = "teacher")
-    )
-    private Teacher teacher;
 
     @JsonIgnoreProperties("course")
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Chapter> chapters;
 
-    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("course")
     private List<Evaluate> evaluates;
 
@@ -70,5 +67,14 @@ public class Course implements Serializable{
     )
     @JsonIgnoreProperties("courses")
     private Type type;
+
+    @ManyToOne(optional = false)
+    @JsonIgnoreProperties("courses")
+    @JoinTable(
+            name = "teacher_course",
+            joinColumns = @JoinColumn(name = "course"),
+            inverseJoinColumns = @JoinColumn(name = "teacher")
+    )
+    private Teacher teacher;
 
 }

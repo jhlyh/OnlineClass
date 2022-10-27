@@ -1,13 +1,11 @@
 package com.example.onlineclass.controller;
 
 import com.example.onlineclass.config.CommonProps;
-import com.example.onlineclass.config.CourseProps;
-import com.example.onlineclass.util.Result;
 import com.example.onlineclass.domain.Course;
 import com.example.onlineclass.repository.CourseRepository;
 import com.example.onlineclass.service.CourseDetailImp;
+import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author jhlyh
@@ -73,6 +71,7 @@ public class CourseController {
             return Result.error(commonProps.getAfterEndError(), e.toString());
         }
     }
+
     @GetMapping("/findIdName")
     public Result<?> findAllIdAndName() {
         try {

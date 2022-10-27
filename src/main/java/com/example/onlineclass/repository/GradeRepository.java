@@ -1,10 +1,10 @@
 package com.example.onlineclass.repository;
 
-import com.example.onlineclass.domain.Class;
+import com.example.onlineclass.domain.Grade;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @author jhlyh
  */
-public interface ClassRepository extends JpaRepository<Class, Long> {
+public interface GradeRepository extends JpaRepository<Grade, Long> {
 }

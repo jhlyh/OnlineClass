@@ -12,13 +12,13 @@ import java.io.Serializable;
 /**
  * @author jhlyh
  * @id 大学班id
- *@isHeadTeacher 是否班主任，0不是，1是
+ * @isHeadTeacher 是否班主任，0不是，1是
  */
 @Data
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
-public class UserClass implements Serializable {
+public class UserGrade implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private final Long id;
@@ -26,19 +26,19 @@ public class UserClass implements Serializable {
 
     @ManyToOne(optional = false)
     @JoinTable(
-            name = "user_to_c",
-            joinColumns = @JoinColumn(name = "user_class"),
+            name = "user_to_g",
+            joinColumns = @JoinColumn(name = "user_grade"),
             inverseJoinColumns = @JoinColumn(name = "user")
     )
-    @JsonIgnoreProperties("classes")
+    @JsonIgnoreProperties("grades")
     private User user;
 
     @ManyToOne(optional = false)
     @JoinTable(
-            name = "class_to_u",
-            joinColumns = @JoinColumn(name = "user_class"),
-            inverseJoinColumns = @JoinColumn(name = "class")
+            name = "grade_to_u",
+            joinColumns = @JoinColumn(name = "user_grade"),
+            inverseJoinColumns = @JoinColumn(name = "grade")
     )
-    @JsonIgnoreProperties("userClasses")
-    private Class aClass;
+    @JsonIgnoreProperties("userGrades")
+    private Grade aGrade;
 }

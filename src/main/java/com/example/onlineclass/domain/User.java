@@ -39,28 +39,30 @@ public class User implements Serializable {
     private String email;
     private String openid;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Teacher teacher;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
-    private List<UserClass> classes;
+    private List<UserGrade> grades;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<Evaluate> evaluates;
 
-    @ManyToOne
-    @JoinTable(
-            name = "user_evaluate_like",
-            joinColumns = @JoinColumn(name = "user"),
-            inverseJoinColumns = @JoinColumn(name = "evaluate_like")
-    )
-    @JsonIgnoreProperties("users")
-    private EvaluateLike evaluateLike;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<Note> notes;
 
-    @ManyToOne
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private List<StudyLog> studyLogs;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_note_like",
             joinColumns = @JoinColumn(name = "user"),
@@ -69,11 +71,12 @@ public class User implements Serializable {
     @JsonIgnoreProperties("users")
     private NoteLike noteLike;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("user")
-    private List<StudyLog> studyLogs;
-
-    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Teacher teacher;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_evaluate_like",
+            joinColumns = @JoinColumn(name = "user"),
+            inverseJoinColumns = @JoinColumn(name = "evaluate_like")
+    )
+    @JsonIgnoreProperties("users")
+    private EvaluateLike evaluateLike;
 }

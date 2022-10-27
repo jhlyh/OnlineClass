@@ -1,10 +1,12 @@
 package com.example.onlineclass.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -34,13 +36,12 @@ public class Teacher implements Serializable {
     private String phone;
     private String email;
     private String introduce;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
-
-
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("teacher")
-    private List<Course> courses;
 
     @OneToOne
     @JoinTable(
@@ -49,4 +50,10 @@ public class Teacher implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "user")
     )
     private User user;
+
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("teacher")
+    private List<Course> courses;
+
+
 }

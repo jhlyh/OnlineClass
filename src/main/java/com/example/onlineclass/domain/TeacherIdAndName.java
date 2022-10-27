@@ -5,5 +5,6 @@ package com.example.onlineclass.domain;
  */
 public interface TeacherIdAndName {
     Long getId();
+
     String getTeacherName();
 }

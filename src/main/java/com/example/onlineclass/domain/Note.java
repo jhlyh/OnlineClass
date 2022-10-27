@@ -1,10 +1,12 @@
 package com.example.onlineclass.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,7 +29,14 @@ public class Note implements Serializable {
     @Id
     private final Long id;
     private String content;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
+
+    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("note")
+    private List<NoteLike> noteLikes;
 
     @ManyToOne(optional = false)
     @JoinTable(
@@ -47,7 +56,4 @@ public class Note implements Serializable {
     @JsonIgnoreProperties("notes")
     private User user;
 
-    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("note")
-    private List<NoteLike> noteLikes;
 }

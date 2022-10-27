@@ -1,10 +1,10 @@
 package com.example.onlineclass.controller;
 
 import com.example.onlineclass.config.CommonProps;
-import com.example.onlineclass.util.Result;
 import com.example.onlineclass.domain.Chapter;
 import com.example.onlineclass.repository.ChapterRepository;
 import com.example.onlineclass.service.ChapterDetailImp;
+import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/section")
 public class ChapterController {
-    private ChapterRepository sectionRepository;
-    private ChapterDetailImp sectionDetailImp;
+    private ChapterRepository chapterRepository;
+    private ChapterDetailImp chapterDetailImp;
     private CommonProps commonProps;
 
-    public ChapterController(ChapterRepository sectionRepository, ChapterDetailImp sectionDetailImp, CommonProps commonProps) {
-        this.sectionRepository = sectionRepository;
-        this.sectionDetailImp = sectionDetailImp;
+    public ChapterController(ChapterRepository chapterRepository, ChapterDetailImp chapterDetailImp, CommonProps commonProps) {
+        this.chapterRepository = chapterRepository;
+        this.chapterDetailImp = chapterDetailImp;
         this.commonProps = commonProps;
     }
 
     @PostMapping("/add")
     public Result<?> addCourse(@RequestBody Chapter chapter) {
         try {
-            return Result.success(sectionRepository.save(chapter));
+            return Result.success(chapterRepository.save(chapter));
         } catch (Exception e) {
             return Result.error(commonProps.getAfterEndError(), e.toString());
         }
@@ -35,7 +35,7 @@ public class ChapterController {
     @PostMapping("/update")
     public Result<?> update(@RequestBody Chapter chapter) {
         try {
-            return Result.success(sectionRepository.save(chapter));
+            return Result.success(chapterRepository.save(chapter));
         } catch (Exception e) {
             return Result.error(commonProps.getAfterEndError(), e.toString());
         }
@@ -48,13 +48,13 @@ public class ChapterController {
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
-        return Result.success(sectionDetailImp.getAllSectionsPage(courseId, page, size, sort));
+        return Result.success(chapterDetailImp.getAllChaptersPage(courseId, page, size, sort));
     }
 
     @GetMapping("/find")
     public Result<?> findById(@RequestParam Long id) {
         try {
-            Chapter chapter = sectionRepository.findById(id).get();
+            Chapter chapter = chapterRepository.findById(id).get();
             return Result.success(chapter);
         } catch (Exception e) {
             return Result.error(commonProps.getAfterEndError(), e.toString());
@@ -64,7 +64,7 @@ public class ChapterController {
     @DeleteMapping("delete")
     public Result<?> deleteById(@RequestParam Long id) {
         try {
-            sectionRepository.deleteById(id);
+            chapterRepository.deleteById(id);
             return Result.success();
         } catch (Exception e) {
             return Result.error(commonProps.getAfterEndError(), e.toString());
