@@ -72,8 +72,8 @@ public class CourseController {
         }
     }
 
-    @GetMapping("/findIdName")
-    public Result<?> findAllIdAndName() {
+    @GetMapping("/findIdType")
+    public Result<?> findAllIdAndType() {
         try {
             return Result.success(courseRepository.findAllBy());
         } catch (Exception e) {

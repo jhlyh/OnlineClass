@@ -1,14 +1,21 @@
 package com.example.onlineclass.service;
 
 import com.example.onlineclass.config.CommonProps;
+import com.example.onlineclass.config.Props;
+import com.example.onlineclass.domain.Course;
 import com.example.onlineclass.util.Result;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.xbib.io.ftp.client.FTP;
 import org.xbib.io.ftp.client.FTPClient;
 import org.xbib.io.ftp.client.FTPReply;
 
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author jhlyh
@@ -17,7 +24,6 @@ import java.util.UUID;
 public class CommonDetailImp implements CommonDetail {
 
     private CommonProps commonProps;
-
     public CommonDetailImp(CommonProps commonProps) {
         this.commonProps = commonProps;
     }
@@ -48,5 +54,34 @@ public class CommonDetailImp implements CommonDetail {
         }
 
         return Result.success(commonProps.getNginxPath() + fileName);
+    }
+
+    @Override
+    public Map<String, Object> getAllPage(int page, int size, String[] sort, JpaRepository jpaRepository, Props props) {
+        try {
+            List<Sort.Order> orders = new ArrayList<>();
+            if (sort[0].contains(",")) {
+                for (String sortOrder : sort) {
+                    String[] _sort = sortOrder.split(",");
+                    orders.add(new Sort.Order(Sort.Direction.fromString(_sort[props.getSortDirectionIndex()]), _sort[props.getTheSortByIndex()]));
+                }
+            } else {
+                orders.add(new Sort.Order(Sort.Direction.fromString(sort[props.getSortDirectionIndex()]), sort[props.getTheSortByIndex()]));
+            }
+            Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
+            Page<Course> coursePage;
+            coursePage = jpaRepository.findAll(pageable);
+            List<Course> courses = coursePage.getContent();
+
+            Map<String, Object> response = new HashMap<>();
+            response.put(props.getReturnDomain(), courses);
+            response.put(props.getReturnCurrentPage(), coursePage.getNumber());
+            response.put(props.getReturnTotalPages(), coursePage.getTotalPages());
+            response.put(props.getReturnTotalItems(), coursePage.getTotalElements());
+            return response;
+
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-public class TeacherProps {
+public class TeacherProps implements Props{
     private Integer sortDirectionIndex = 1;
     private Integer theSortByIndex = 0;
-    private String returnTeachers = "teachers";
+    private String returnDomain = "teachers";
     private String returnCurrentPage = "currentPage";
     private String returnTotalPages = "totalPages";
     private String returnTotalItems = "totalItems";

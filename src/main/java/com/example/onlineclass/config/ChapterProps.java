@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class ChapterProps {
+public class ChapterProps implements Props{
     private Integer sortDirectionIndex = 1;
     private Integer theSortByIndex = 0;
-    private String returnSections = "sections";
+    private String returnDomain = "sections";
     private String returnCurrentPage = "currentPage";
     private String returnTotalPages = "totalPages";
     private String returnTotalItems = "totalItems";

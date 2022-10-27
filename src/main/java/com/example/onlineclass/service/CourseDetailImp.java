@@ -25,40 +25,17 @@ public class CourseDetailImp implements CourseDetail {
     private CourseRepository courseRepository;
     private CourseProps courseProps;
     private CommonProps commonProps;
+    private CommonDetailImp commonDetailImp;
 
-    public CourseDetailImp(CourseRepository courseRepository, CourseProps courseProps, CommonProps commonProps) {
+    public CourseDetailImp(CourseRepository courseRepository, CourseProps courseProps, CommonProps commonProps, CommonDetailImp commonDetailImp) {
         this.courseRepository = courseRepository;
         this.courseProps = courseProps;
         this.commonProps = commonProps;
+        this.commonDetailImp =commonDetailImp;
     }
 
     @Override
     public Map<String, Object> getAllCoursesPage(int page, int size, String[] sort) {
-
-        try {
-            List<Order> orders = new ArrayList<>();
-            if (sort[0].contains(",")) {
-                for (String sortOrder : sort) {
-                    String[] _sort = sortOrder.split(",");
-                    orders.add(new Order(Direction.fromString(_sort[courseProps.getSortDirectionIndex()]), _sort[courseProps.getTheSortByIndex()]));
-                }
-            } else {
-                orders.add(new Order(Direction.fromString(sort[courseProps.getSortDirectionIndex()]), sort[courseProps.getTheSortByIndex()]));
-            }
-            Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
-            Page<Course> coursePage;
-            coursePage = courseRepository.findAll(pageable);
-            List<Course> courses = coursePage.getContent();
-
-            Map<String, Object> response = new HashMap<>();
-            response.put(courseProps.getReturnCourses(), courses);
-            response.put(courseProps.getReturnCurrentPage(), coursePage.getNumber());
-            response.put(courseProps.getReturnTotalPages(), coursePage.getTotalPages());
-            response.put(courseProps.getReturnTotalItems(), coursePage.getTotalElements());
-            return response;
-
-        } catch (Exception e) {
-            return null;
-        }
+        return commonDetailImp.getAllPage(page,size,sort,courseRepository,courseProps);
     }
 }

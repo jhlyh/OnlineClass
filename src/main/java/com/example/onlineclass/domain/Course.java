@@ -39,7 +39,6 @@ public class Course implements Serializable {
     private final Long id;
     protected Integer view;
     private String name;
-    private Integer Type;
     private String coverUrl;
     private Integer period;
     private String introduction;

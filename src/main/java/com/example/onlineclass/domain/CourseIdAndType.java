@@ -1,7 +1,7 @@
 package com.example.onlineclass.domain;
 
-public interface CourseIdAndName {
+public interface CourseIdAndType {
     Long getId();
 
-    String getName();
+    String getTypeName();
 }

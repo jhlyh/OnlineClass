@@ -44,7 +44,7 @@ public class ChapterDetailImp implements ChapterDetail {
             List<Chapter> chapters = sectionPage.getContent();
             Map<String, Object> response = new HashMap<>();
 
-            response.put(chapterProps.getReturnSections(), chapters);
+            response.put(chapterProps.getReturnDomain(), chapters);
             response.put(chapterProps.getReturnTotalPages(), sectionPage.getTotalPages());
             response.put(chapterProps.getReturnCurrentPage(), sectionPage.getNumber());
             response.put(chapterProps.getReturnTotalItems(), sectionPage.getTotalElements());
@@ -52,7 +52,6 @@ public class ChapterDetailImp implements ChapterDetail {
             return response;
 
         } catch (Exception e) {
-            System.out.println(e.toString());
             return null;
         }
     }
