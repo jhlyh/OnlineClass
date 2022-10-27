@@ -53,11 +53,11 @@ public class Chapter implements Serializable {
     @JsonIgnoreProperties("chapter")
     private List<Note> notes;
 
-    /** 与课程为多对一关系，章节必须存在课程，在JSON中忽略课程的本身，为关系维护方
+    /** 与课程为多对一关系,在JSON中忽略课程的本身，为关系维护方
      *
      */
+    @ManyToOne
     @JsonIgnoreProperties("chapters")
-    @ManyToOne(optional = false)
     @JoinTable(
             name = "course_chapter",
             joinColumns = @JoinColumn(name = "chapter"),

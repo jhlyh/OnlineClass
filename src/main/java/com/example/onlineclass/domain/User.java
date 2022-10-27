@@ -48,6 +48,10 @@ public class User implements Serializable {
     @JsonIgnoreProperties("user")
     private List<UserGrade> grades;
 
+/*    @OneToMany
+    @JsonIgnore
+    private List<Grade> manageGrades;*/
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<Evaluate> evaluates;

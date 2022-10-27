@@ -19,6 +19,9 @@ import java.util.List;
  * @content 评价内容
  * @score 评价分数
  * @createTime 创建时间
+ * @evaluatelike 评价点赞
+ * @course 所属课程
+ * @user 发表评论的人
  */
 @Data
 @Entity
@@ -35,11 +38,17 @@ public class Evaluate implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
+    /** 与评价点赞为一对多关系，拥有级联权力，JSON忽略点赞中的自身
+     *
+     */
     @OneToMany(mappedBy = "evaluate", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("evaluate")
     private List<EvaluateLike> evaluateLikes;
 
-    @ManyToOne(optional = false)
+    /** 与课程为多对一关系，必须类型，JSON忽略课程其中的自身
+     *
+     */
+    @ManyToOne
     @JoinTable(
             name = "course_evaluate",
             joinColumns = @JoinColumn(name = "evaluate"),
@@ -48,8 +57,10 @@ public class Evaluate implements Serializable {
     @JsonIgnoreProperties("evaluates")
     private Course course;
 
-
-    @ManyToOne(optional = false)
+    /** 与用户为多对一关系，必须类型，JSON忽略其中自身
+     *
+     */
+    @ManyToOne
     @JoinTable(
             name = "user_evaluate",
             joinColumns = @JoinColumn(name = "evaluate"),

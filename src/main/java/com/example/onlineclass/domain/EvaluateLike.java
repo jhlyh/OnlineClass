@@ -35,7 +35,7 @@ public class EvaluateLike implements Serializable {
     @JsonIgnoreProperties("evaluateLike")
     private List<User> users;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinTable(
             name = "evaluate_evaluate_like",
             joinColumns = @JoinColumn(name = "evaluate_like"),

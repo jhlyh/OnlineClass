@@ -30,7 +30,7 @@ public class StudyLog implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinTable(
             name = "chapter_log",
             joinColumns = @JoinColumn(name = "study_log"),

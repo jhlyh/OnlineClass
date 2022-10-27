@@ -34,4 +34,12 @@ public class Grade implements Serializable {
     @OneToMany(mappedBy = "aGrade", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("aGrade")
     private List<UserGrade> userGrades;
+
+/*    @ManyToOne(optional = false)
+    @JoinTable(
+            name = "headTeacher_grade",
+            joinColumns = @JoinColumn(name = "grade"),
+            inverseJoinColumns = @JoinColumn(name = "headteacher")
+    )
+    private User headteacher;*/
 }

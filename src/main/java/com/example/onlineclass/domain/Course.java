@@ -47,7 +47,7 @@ public class Course implements Serializable {
     private String introduction;
     /**
      * @DataTimeFormat 将前台发回的时间戳字符串转换为Date类型
-     * @JsonFormat
+     * @JsonFormat 返回前台的数据转换为字符串时间戳
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -56,16 +56,24 @@ public class Course implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
-
+    /** 与章节为一对多关系，具有级联权力，JSON忽略章节其中的自身
+     *
+     */
     @JsonIgnoreProperties("course")
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Chapter> chapters;
 
+    /** 与课程评价为一对多关系，具有级联权力，JSON忽略章节其中的自身
+     *
+     */
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("course")
     private List<Evaluate> evaluates;
 
-    @ManyToOne(optional = false)
+    /** 与课程类型为多对一关系，必须类型，JSON忽略type中的自身
+     *
+     */
+    @ManyToOne
     @JoinTable(
             name = "course_type",
             joinColumns = @JoinColumn(name = "course"),
@@ -74,7 +82,10 @@ public class Course implements Serializable {
     @JsonIgnoreProperties("courses")
     private Type type;
 
-    @ManyToOne(optional = false)
+    /** 与授课老师为多对一关系，必须类型，JSON忽略teacher中的自身
+     *
+     */
+    @ManyToOne
     @JsonIgnoreProperties("courses")
     @JoinTable(
             name = "teacher_course",

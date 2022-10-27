@@ -25,7 +25,7 @@ public class UserGrade implements Serializable {
     private final Long id;
     private Integer isHeadTeacher;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinTable(
             name = "user_to_g",
             joinColumns = @JoinColumn(name = "user_grade"),
@@ -34,7 +34,7 @@ public class UserGrade implements Serializable {
     @JsonIgnoreProperties("grades")
     private User user;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinTable(
             name = "grade_to_u",
             joinColumns = @JoinColumn(name = "user_grade"),

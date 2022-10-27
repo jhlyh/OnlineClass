@@ -39,7 +39,7 @@ public class Note implements Serializable {
     @JsonIgnoreProperties("note")
     private List<NoteLike> noteLikes;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinTable(
             name = "chapter_note",
             joinColumns = @JoinColumn(name = "note"),
@@ -48,7 +48,7 @@ public class Note implements Serializable {
     @JsonIgnoreProperties("notes")
     private Chapter chapter;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinTable(
             name = "user_notes",
             joinColumns = @JoinColumn(name = "note"),

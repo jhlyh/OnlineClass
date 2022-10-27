@@ -35,7 +35,7 @@ public class NoteLike implements Serializable {
     @JsonIgnoreProperties("noteLike")
     private List<User> users;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinTable(
             name = "note_note_like",
             joinColumns = @JoinColumn(name = "note_like"),
