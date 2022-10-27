@@ -12,4 +12,5 @@ import java.util.List;
  */
 public interface CourseRepository extends JpaRepository<Course, Long> {
     List<CourseIdAndType> findAllBy();
+    List<Course> findByNameLike(String name);
 }
