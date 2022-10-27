@@ -15,11 +15,12 @@ import java.util.List;
  * @id 章节id
  * @name; 章节名字
  * @state; 章节学习进度
- * @course 所属课程
  * @info 章节简介
  * @videoUrl 视频地址
- * @parentSection 父章节（搁浅）
  * @sort 排序
+ * @studyLogs 学习记录
+ * @notes 笔记
+ * @course 所属课程
  */
 @Data
 @Entity
@@ -38,14 +39,23 @@ public class Chapter implements Serializable {
     private String info;
     private Integer sort;
 
+    /** 与学习记录为一对多关系，且章节具有级联权力，采用外表方式存储其关系，为保证返回结果不产生嵌套，在JSON中省略学习记录的自身
+     *
+     */
     @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("chapter")
     private List<StudyLog> studyLogs;
 
+    /**与学习笔记为一对多关系，且章节具有级联权力，采用外表方式存储其关系，为保证返回结果不产生嵌套，在JSON中忽略学习记录的自身
+     *
+     */
     @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("chapter")
     private List<Note> notes;
 
+    /** 与课程为多对一关系，章节必须存在课程，在JSON中忽略课程的本身，为关系维护方
+     *
+     */
     @JsonIgnoreProperties("chapters")
     @ManyToOne(optional = false)
     @JoinTable(

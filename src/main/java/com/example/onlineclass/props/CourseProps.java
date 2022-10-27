@@ -1,4 +1,4 @@
-package com.example.onlineclass.config;
+package com.example.onlineclass.props;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

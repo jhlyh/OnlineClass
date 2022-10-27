@@ -1,7 +1,7 @@
 package com.example.onlineclass.service;
 
-import com.example.onlineclass.config.CommonProps;
-import com.example.onlineclass.config.Props;
+import com.example.onlineclass.props.CommonProps;
+import com.example.onlineclass.props.Props;
 import com.example.onlineclass.domain.Course;
 import com.example.onlineclass.util.Result;
 import org.springframework.data.domain.Page;

@@ -1,20 +1,10 @@
 package com.example.onlineclass.service;
 
-import com.example.onlineclass.config.CommonProps;
-import com.example.onlineclass.config.CourseProps;
-import com.example.onlineclass.domain.Course;
+import com.example.onlineclass.props.CommonProps;
+import com.example.onlineclass.props.CourseProps;
 import com.example.onlineclass.repository.CourseRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

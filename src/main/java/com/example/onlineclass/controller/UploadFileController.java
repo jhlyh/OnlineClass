@@ -1,6 +1,6 @@
 package com.example.onlineclass.controller;
 
-import com.example.onlineclass.config.CommonProps;
+import com.example.onlineclass.props.CommonProps;
 import com.example.onlineclass.service.CommonDetailImp;
 import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.PostMapping;

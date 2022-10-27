@@ -1,6 +1,6 @@
 package com.example.onlineclass.service;
 
-import com.example.onlineclass.config.ChapterProps;
+import com.example.onlineclass.props.ChapterProps;
 import com.example.onlineclass.domain.Chapter;
 import com.example.onlineclass.repository.ChapterRepository;
 import org.springframework.data.domain.Page;

@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @author jhlyh
- * @id 课程章节
+ * @id 课程id
  * @name; 课程名字
  * @Type; 课程类型（性质：公开课、定制课）
  * @introduction 课程简介
@@ -25,7 +25,10 @@ import java.util.List;
  * @updateTime 更新时间
  * @period; 课时
  * @teacher 授课老师
- * @sections 课程章节
+ * @chapters 课程章节
+ * @evaluates 课程评价
+ * @type 课程类型
+ * @teacher 课程老师
  */
 @Data
 @Entity
@@ -42,6 +45,10 @@ public class Course implements Serializable {
     private String coverUrl;
     private Integer period;
     private String introduction;
+    /**
+     * @DataTimeFormat 将前台发回的时间戳字符串转换为Date类型
+     * @JsonFormat
+     */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;

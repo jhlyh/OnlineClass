@@ -1,6 +1,6 @@
 package com.example.onlineclass.controller;
 
-import com.example.onlineclass.config.CommonProps;
+import com.example.onlineclass.props.CommonProps;
 import com.example.onlineclass.domain.Course;
 import com.example.onlineclass.repository.CourseRepository;
 import com.example.onlineclass.service.CourseDetailImp;

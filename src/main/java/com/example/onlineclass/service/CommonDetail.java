@@ -1,6 +1,6 @@
 package com.example.onlineclass.service;
 
-import com.example.onlineclass.config.Props;
+import com.example.onlineclass.props.Props;
 import com.example.onlineclass.util.Result;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.multipart.MultipartFile;

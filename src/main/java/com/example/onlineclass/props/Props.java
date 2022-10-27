@@ -1,4 +1,4 @@
-package com.example.onlineclass.config;
+package com.example.onlineclass.props;
 
 public interface Props {
     Integer getSortDirectionIndex();
