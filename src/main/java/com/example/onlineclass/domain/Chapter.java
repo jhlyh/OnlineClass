@@ -1,5 +1,6 @@
 package com.example.onlineclass.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -57,7 +58,8 @@ public class Chapter implements Serializable {
      *
      */
     @ManyToOne
-    @JsonIgnoreProperties("chapters")
+    /*@JsonIgnoreProperties("chapters")*/
+    @JsonIgnore
     @JoinTable(
             name = "course_chapter",
             joinColumns = @JoinColumn(name = "chapter"),

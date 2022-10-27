@@ -1,6 +1,7 @@
 package com.example.onlineclass.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -59,7 +60,8 @@ public class Course implements Serializable {
     /** 与章节为一对多关系，具有级联权力
      *
      */
-    @JsonIgnoreProperties("course")
+    /*@JsonIgnoreProperties("course")*/
+    @JsonIgnore
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<Chapter> chapters;
 
@@ -67,7 +69,8 @@ public class Course implements Serializable {
      *
      */
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("course")
+    /*@JsonIgnoreProperties("course")*/
+    @JsonIgnore
     private List<Evaluate> evaluates;
 
     /** 与课程类型为多对一关系
@@ -79,14 +82,16 @@ public class Course implements Serializable {
             joinColumns = @JoinColumn(name = "course"),
             inverseJoinColumns = @JoinColumn(name = "type")
     )
-    @JsonIgnoreProperties("courses")
+    /*@JsonIgnoreProperties("courses")*/
+    @JsonIgnore
     private Type type;
 
     /** 与授课老师为多对一关系
      *
      */
     @ManyToOne
-    @JsonIgnoreProperties("courses")
+    @JsonIgnore
+    /*@JsonIgnoreProperties("courses")*/
     @JoinTable(
             name = "teacher_course",
             joinColumns = @JoinColumn(name = "course"),

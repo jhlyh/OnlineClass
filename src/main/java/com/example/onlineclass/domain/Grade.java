@@ -48,5 +48,6 @@ public class Grade implements Serializable {
             joinColumns = @JoinColumn(name = "grade"),
             inverseJoinColumns = @JoinColumn(name = "headteacher")
     )
+    @JsonIgnoreProperties("manageGrades")
     private User headteacher;
 }
