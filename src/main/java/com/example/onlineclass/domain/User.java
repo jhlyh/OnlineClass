@@ -110,7 +110,12 @@ public class User implements Serializable {
     /**
      * 与班级为多对多关系
      */
-    @ManyToMany(mappedBy = "classes")
+    @ManyToMany
+    @JoinTable(
+             name = "user_grade",
+            joinColumns = @JoinColumn(name = "user"),
+            inverseJoinColumns = @JoinColumn(name = "grade")
+    )
     @JsonIgnoreProperties({"headteacher", "classes"})
     private List<Grade> grades;
 }

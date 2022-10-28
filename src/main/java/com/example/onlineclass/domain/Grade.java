@@ -48,12 +48,7 @@ public class Grade implements Serializable {
     /**
      * 与用户为多对多关系
      */
-    @ManyToMany
-    @JoinTable(
-            name = "user_grade",
-            joinColumns = @JoinColumn(name = "grade"),
-            inverseJoinColumns = @JoinColumn(name = "user")
-    )
+    @ManyToMany(mappedBy = "grades")
     @JsonIgnoreProperties({"evaluateLike","noteLike", "studyLogs", "notes", "evaluates", "manageGrades", "teacher"})
     private List<User> classes;
 }
