@@ -46,8 +46,8 @@ public class TeacherController {
 
     @GetMapping("/findAll")
     public Result<?> findAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "3") Integer size,
             @RequestParam(defaultValue = "id,desc") String[] sort) {
 
         return Result.success(teacherDetailImp.getAllTeachersPage(page, size, sort));

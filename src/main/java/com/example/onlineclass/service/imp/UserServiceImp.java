@@ -9,16 +9,18 @@ import java.util.Map;
 
 @Service
 public class UserServiceImp implements UserService {
-    private CommonServiceImp commonServiceImp;
-    private UserRepository userRepository;
-    private UserProps userProps;
+    private final CommonServiceImp commonServiceImp;
+    private final UserRepository userRepository;
+    private final UserProps userProps;
+
     public UserServiceImp(CommonServiceImp commonServiceImp, UserRepository userRepository, UserProps userProps) {
         this.commonServiceImp = commonServiceImp;
         this.userRepository = userRepository;
         this.userProps = userProps;
     }
+
     @Override
-    public Map<String, Object> getAllUsersPage(int page, int size, String[] sort) {
+    public Map<String, Object> getAllUsersPage(Integer page, Integer size, String[] sort) {
         return commonServiceImp.getAllPage(page, size, sort, userRepository, userProps);
     }
 }

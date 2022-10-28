@@ -3,7 +3,6 @@ package com.example.onlineclass.service.imp;
 import com.example.onlineclass.props.TeacherProps;
 import com.example.onlineclass.repository.TeacherRepository;
 import com.example.onlineclass.service.TeacherSevice;
-import com.example.onlineclass.service.imp.CommonServiceImp;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -23,13 +22,14 @@ public class TeacherSeviceImp implements TeacherSevice {
 
     /**
      * 调用内聚的commonDetailImp实现分页排序查询
+     *
      * @param page
      * @param size
      * @param sort
      * @return
      */
     @Override
-    public Map<String, Object> getAllTeachersPage(int page, int size, String[] sort) {
+    public Map<String, Object> getAllTeachersPage(Integer page, Integer size, String[] sort) {
         return commonDetailImp.getAllPage(page, size, sort, teacherRepository, teacherProps);
     }
 }

@@ -34,6 +34,7 @@ public class CommonServiceImp implements CommonService {
      * 首先连接FTP，
      * 再将要上传的文件二进制话，
      * 再返回上传的地址
+     *
      * @param multipartFile
      * @param path
      * @return
@@ -68,6 +69,7 @@ public class CommonServiceImp implements CommonService {
 
     /**
      * 将仅仅是排序分页功能进行内聚，降低重复性代码
+     *
      * @param page
      * @param size
      * @param sort
@@ -76,7 +78,7 @@ public class CommonServiceImp implements CommonService {
      * @return
      */
     @Override
-    public Map<String, Object> getAllPage(int page, int size, String[] sort, JpaRepository jpaRepository, Props props) {
+    public Map<String, Object> getAllPage(Integer page, Integer size, String[] sort, JpaRepository jpaRepository, Props props) {
         try {
             List<Sort.Order> orders = new ArrayList<>();
             if (sort[0].contains(",")) {

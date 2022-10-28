@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface EvaluateRepository extends JpaRepository<Evaluate, Long> {
     /**
      * 根据课程I分页查询课程评价
+     *
      * @param courseId
      * @param pageable
      * @return

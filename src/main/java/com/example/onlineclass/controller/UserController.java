@@ -22,6 +22,7 @@ public class UserController {
 
     /**
      * 增加
+     *
      * @param user
      * @return
      */
@@ -36,6 +37,7 @@ public class UserController {
 
     /**
      * 更新
+     *
      * @param user
      * @return
      */
@@ -50,6 +52,7 @@ public class UserController {
 
     /**
      * 分页排序查询
+     *
      * @param page
      * @param size
      * @param sort
@@ -57,8 +60,8 @@ public class UserController {
      */
     @GetMapping("/findAll")
     public Result<?> findAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "3") Integer size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
         return Result.success(userServiceImp.getAllUsersPage(page, size, sort));
@@ -66,6 +69,7 @@ public class UserController {
 
     /**
      * 根据ID查找用户
+     *
      * @param id
      * @return
      */
@@ -81,6 +85,7 @@ public class UserController {
 
     /**
      * 根据Id删除用户
+     *
      * @param id
      * @return
      */

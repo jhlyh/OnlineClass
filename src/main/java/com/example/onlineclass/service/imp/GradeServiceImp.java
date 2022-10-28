@@ -9,17 +9,18 @@ import java.util.Map;
 
 @Service
 public class GradeServiceImp implements GradeService {
-    private GradeProps gradeProps;
-    private GradeRepository gradeRepository;
-    private CommonServiceImp commonServiceImp;
+    private final GradeProps gradeProps;
+    private final GradeRepository gradeRepository;
+    private final CommonServiceImp commonServiceImp;
 
     public GradeServiceImp(GradeProps gradeProps, GradeRepository gradeRepository, CommonServiceImp commonServiceImp) {
         this.commonServiceImp = commonServiceImp;
         this.gradeProps = gradeProps;
         this.gradeRepository = gradeRepository;
     }
+
     @Override
-    public Map<String, Object> getAllGradePage(int page, int size, String[] sort) {
+    public Map<String, Object> getAllGradePage(Integer page,Integer size, String[] sort) {
         return commonServiceImp.getAllPage(page, size, sort, gradeRepository, gradeProps);
     }
 }

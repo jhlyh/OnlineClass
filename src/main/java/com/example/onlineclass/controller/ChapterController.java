@@ -44,8 +44,8 @@ public class ChapterController {
     @GetMapping("/findAll")
     public Result<?> findAllByCourseId(
             @RequestParam Long courseId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "3") Integer size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
         return Result.success(chapterDetailImp.getAllChaptersPage(courseId, page, size, sort));

@@ -42,8 +42,8 @@ public class EvaluateController {
     @GetMapping("/findAll")
     public Result<?> findAll(
             @RequestParam Long courseId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "3") Integer size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
         return Result.success(evaluateDetailImp.getAllEvaluatePage(courseId, page, size, sort));

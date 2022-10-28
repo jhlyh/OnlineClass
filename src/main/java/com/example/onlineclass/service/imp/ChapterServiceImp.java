@@ -33,6 +33,7 @@ public class ChapterServiceImp implements ChapterService {
     /**
      * 根据课程ID分页排序返回章节信息
      * 首先查看排序是否为多样排序，再进行排序分页
+     *
      * @param courseId
      * @param page
      * @param size
@@ -40,7 +41,7 @@ public class ChapterServiceImp implements ChapterService {
      * @return
      */
     @Override
-    public Map<String, Object> getAllChaptersPage(Long courseId, int page, int size, String[] sort) {
+    public Map<String, Object> getAllChaptersPage(Long courseId, Integer page, Integer size, String[] sort) {
         try {
             List<Order> orders = new ArrayList<>();
             if (sort[0].contains(",")) {

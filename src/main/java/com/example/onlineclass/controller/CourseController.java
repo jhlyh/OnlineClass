@@ -51,10 +51,9 @@ public class CourseController {
             @RequestParam(defaultValue = "3") Integer size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
-        if(name == null) {
+        if (name == null) {
             return Result.success(courseDetailImp.getAllCoursesPage(typeId, name, page, size, sort));
-        }else
-        {
+        } else {
             return Result.success(courseDetailImp.getAllCoursesPage(typeId, "%" + name + "%", page, size, sort));
         }
     }

@@ -1,6 +1,5 @@
 package com.example.onlineclass.service.imp;
 
-import com.example.onlineclass.domain.Chapter;
 import com.example.onlineclass.domain.StudyLog;
 import com.example.onlineclass.props.StudyLogProps;
 import com.example.onlineclass.repository.StudyLogRepository;
@@ -15,11 +14,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @Service
 public class StudyLogServiceImp implements StudyLogService {
 
-    private StudyLogProps studyLogProps;
-    private StudyLogRepository studyLogRepository;
+    private final StudyLogProps studyLogProps;
+    private final StudyLogRepository studyLogRepository;
 
     public StudyLogServiceImp(StudyLogRepository studyLogRepository, StudyLogProps studyLogProps) {
         this.studyLogProps = studyLogProps;
@@ -28,6 +28,7 @@ public class StudyLogServiceImp implements StudyLogService {
 
     /**
      * 根据用户Id分页排序查询学习记录实现
+     *
      * @param userId
      * @param page
      * @param size

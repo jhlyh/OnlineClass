@@ -31,6 +31,7 @@ public class EvaluateServiceImp implements EvaluateService {
 
     /**
      * 根据课程ID分页查询实现
+     *
      * @param courseId
      * @param page
      * @param size
@@ -38,7 +39,7 @@ public class EvaluateServiceImp implements EvaluateService {
      * @return
      */
     @Override
-    public Map<String, Object> getAllEvaluatePage(Long courseId, int page, int size, String[] sort) {
+    public Map<String, Object> getAllEvaluatePage(Long courseId, Integer page, Integer size, String[] sort) {
         try {
             List<Sort.Order> orders = new ArrayList<>();
             if (sort[0].contains(",")) {

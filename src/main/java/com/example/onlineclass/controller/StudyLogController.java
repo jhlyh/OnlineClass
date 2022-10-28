@@ -6,8 +6,6 @@ import com.example.onlineclass.service.imp.StudyLogServiceImp;
 import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 /**
  * @author jhlyh
  */
@@ -24,6 +22,7 @@ public class StudyLogController {
 
     /**
      * 增加
+     *
      * @param studyLog
      * @return
      */
@@ -38,6 +37,7 @@ public class StudyLogController {
 
     /**
      * 更新
+     *
      * @param studyLog
      * @return
      */
@@ -52,6 +52,7 @@ public class StudyLogController {
 
     /**
      * 根据用户Id分页排序查询学习记录
+     *
      * @param page
      * @param size
      * @param sort
@@ -69,6 +70,7 @@ public class StudyLogController {
 
     /**
      * 根据id查询学习记录
+     *
      * @param id
      * @return
      */
@@ -84,6 +86,7 @@ public class StudyLogController {
 
     /**
      * 根据Id删除学习记录
+     *
      * @param id
      * @return
      */

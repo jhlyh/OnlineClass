@@ -1,7 +1,6 @@
 package com.example.onlineclass.props;
 
 import com.example.onlineclass.props.flagInterface.Props;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 

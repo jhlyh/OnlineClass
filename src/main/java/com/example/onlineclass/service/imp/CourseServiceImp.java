@@ -38,6 +38,7 @@ public class CourseServiceImp implements CourseService {
 
     /**
      * 根据课程类型以及名字模糊分页排序查询
+     *
      * @param typeId
      * @param name
      * @param page
@@ -46,15 +47,15 @@ public class CourseServiceImp implements CourseService {
      * @return
      */
     @Override
-    public Map<String, Object> getAllCoursesPage(Integer typeId,String name, Integer page, Integer size, String[] sort) {
+    public Map<String, Object> getAllCoursesPage(Integer typeId, String name, Integer page, Integer size, String[] sort) {
         Specification<Course> queryCondition = new Specification<Course>() {
             @Override
             public Predicate toPredicate(Root<Course> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicateList = new ArrayList<>();
-                if(typeId != null) {
+                if (typeId != null) {
                     predicateList.add(criteriaBuilder.equal(root.get("type"), typeId));
                 }
-                if(name != null) {
+                if (name != null) {
                     predicateList.add(criteriaBuilder.like(root.get("name"), name));
                 }
                 return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
@@ -80,7 +81,7 @@ public class CourseServiceImp implements CourseService {
             response.put(courseProps.getReturnTotalItems(), aPage.getTotalElements());
             return response;
         } catch (Exception e) {
-            System.out.println(e.toString());
+            System.out.println(e);
             return null;
         }
     }

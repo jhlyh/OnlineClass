@@ -6,6 +6,8 @@ import com.example.onlineclass.service.imp.GradeServiceImp;
 import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 /**
  * @author jhlyh
  */
@@ -40,6 +42,7 @@ public class GradeController {
 
     /**
      * 分页查询
+     *
      * @param page
      * @param size
      * @param sort
@@ -47,8 +50,8 @@ public class GradeController {
      */
     @GetMapping("/findAll")
     public Result<?> findAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "3") Integer size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
         return Result.success(gradeServiceImp.getAllGradePage(page, size, sort));

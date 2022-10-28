@@ -13,6 +13,7 @@ import java.util.List;
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
     /**
      * 查询返回老师名字及其ID
+     *
      * @return
      */
     List<TeacherIdAndName> findAllBy();

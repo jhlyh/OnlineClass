@@ -13,6 +13,7 @@ import java.util.Map;
 public interface CommonService {
     /**
      * 上传文件接口
+     *
      * @param multipartFile
      * @param path
      * @return
@@ -21,6 +22,7 @@ public interface CommonService {
 
     /**
      * 分页排序接口
+     *
      * @param page
      * @param size
      * @param sort
@@ -28,5 +30,5 @@ public interface CommonService {
      * @param props
      * @return
      */
-    Map<String, Object> getAllPage(int page, int size, String[] sort, JpaRepository jpaRepository, Props props);
+    Map<String, Object> getAllPage(Integer page, Integer size, String[] sort, JpaRepository jpaRepository, Props props);
 }

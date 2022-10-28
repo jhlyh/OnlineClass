@@ -53,7 +53,7 @@ public class Teacher implements Serializable {
             joinColumns = @JoinColumn(name = "teacher"),
             inverseJoinColumns = @JoinColumn(name = "user")
     )
-    @JsonIgnoreProperties({"evaluateLike","noteLike", "studyLogs", "notes", "evaluates", "manageGrades", "teacher"})
+    @JsonIgnoreProperties({"evaluateLike", "noteLike", "studyLogs", "notes", "evaluates", "manageGrades", "teacher"})
     private User user;
 
     /**
@@ -67,6 +67,6 @@ public class Teacher implements Serializable {
      * 老师管理班级，一对多
      */
     @OneToMany(mappedBy = "headteacher")
-    @JsonIgnoreProperties({"headteacher","classes"})
+    @JsonIgnoreProperties({"headteacher", "classes"})
     private List<Grade> grades;
 }
