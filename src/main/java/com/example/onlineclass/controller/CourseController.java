@@ -45,11 +45,18 @@ public class CourseController {
 
     @GetMapping("/findAll")
     public Result<?> findAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(required = false) Integer typeId,
+            @RequestParam(required = false) String name,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "3") Integer size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
-        return Result.success(courseDetailImp.getAllCoursesPage(page, size, sort));
+        if(name == null) {
+            return Result.success(courseDetailImp.getAllCoursesPage(typeId, name, page, size, sort));
+        }else
+        {
+            return Result.success(courseDetailImp.getAllCoursesPage(typeId, "%" + name + "%", page, size, sort));
+        }
     }
 
     @GetMapping("/find")
