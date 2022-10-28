@@ -14,5 +14,5 @@ public interface UserService {
      * @param sort
      * @return
      */
-    Map<String, Object> getAllUsersPage(Integer page, Integer size, String[] sort);
+    Map<String, Object> getAllUsersPage(String name, Integer page, Integer size, String[] sort);
 }
