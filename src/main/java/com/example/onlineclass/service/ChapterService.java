@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * @author jhlyh
  */
-public interface ChapterDetail {
+public interface ChapterService {
     /**
      * 根据课程ID分页排序返回章节信息
      * @param courseId

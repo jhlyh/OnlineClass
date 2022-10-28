@@ -1,8 +1,9 @@
-package com.example.onlineclass.service;
+package com.example.onlineclass.service.imp;
 
 import com.example.onlineclass.domain.Evaluate;
 import com.example.onlineclass.props.EvaluateProps;
 import com.example.onlineclass.repository.EvaluateRepository;
+import com.example.onlineclass.service.EvaluateService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,12 +19,12 @@ import java.util.Map;
  * @author jhlyh
  */
 @Service
-public class EvaluateDetailImp implements EvaluateDetail {
+public class EvaluateServiceImp implements EvaluateService {
 
     private final EvaluateRepository evaluateRepository;
     private final EvaluateProps evaluateProps;
 
-    public EvaluateDetailImp(EvaluateRepository evaluateRepository, EvaluateProps evaluateProps) {
+    public EvaluateServiceImp(EvaluateRepository evaluateRepository, EvaluateProps evaluateProps) {
         this.evaluateRepository = evaluateRepository;
         this.evaluateProps = evaluateProps;
     }

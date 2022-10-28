@@ -2,6 +2,7 @@ package com.example.onlineclass.controller;
 
 import com.example.onlineclass.domain.User;
 import com.example.onlineclass.repository.UserRepository;
+import com.example.onlineclass.service.imp.UserServiceImp;
 import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +13,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
     private final UserRepository userRepository;
+    private final UserServiceImp userServiceImp;
 
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, UserServiceImp userServiceImp) {
         this.userRepository = userRepository;
+        this.userServiceImp = userServiceImp;
     }
 
+    /**
+     * 增加
+     * @param user
+     * @return
+     */
     @PostMapping("/add")
     public Result<?> add(@RequestBody User user) {
         try {
@@ -26,6 +34,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 更新
+     * @param user
+     * @return
+     */
     @PostMapping("update")
     public Result<?> update(@RequestBody User user) {
         try {
@@ -36,8 +49,7 @@ public class UserController {
     }
 
     /**
-     * 未完成
-     *
+     * 分页排序查询
      * @param page
      * @param size
      * @param sort
@@ -49,9 +61,14 @@ public class UserController {
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
-        return Result.success(userRepository.findAll());
+        return Result.success(userServiceImp.getAllUsersPage(page, size, sort));
     }
 
+    /**
+     * 根据ID查找用户
+     * @param id
+     * @return
+     */
     @GetMapping("find")
     public Result<?> findById(@RequestParam Long id) {
         try {
@@ -62,6 +79,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 根据Id删除用户
+     * @param id
+     * @return
+     */
     @DeleteMapping("/delete")
     public Result<?> deleteById(@RequestParam Long id) {
         try {

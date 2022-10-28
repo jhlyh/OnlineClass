@@ -1,7 +1,8 @@
-package com.example.onlineclass.service;
+package com.example.onlineclass.service.imp;
 
 import com.example.onlineclass.props.CommonProps;
-import com.example.onlineclass.props.Props;
+import com.example.onlineclass.props.flagInterface.Props;
+import com.example.onlineclass.service.CommonService;
 import com.example.onlineclass.util.Result;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,11 +21,11 @@ import java.util.*;
  * @author jhlyh
  */
 @Service
-public class CommonDetailImp implements CommonDetail {
+public class CommonServiceImp implements CommonService {
 
     private final CommonProps commonProps;
 
-    public CommonDetailImp(CommonProps commonProps) {
+    public CommonServiceImp(CommonProps commonProps) {
         this.commonProps = commonProps;
     }
 

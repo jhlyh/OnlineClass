@@ -2,7 +2,7 @@ package com.example.onlineclass.controller;
 
 import com.example.onlineclass.domain.Evaluate;
 import com.example.onlineclass.repository.EvaluateRepository;
-import com.example.onlineclass.service.EvaluateDetailImp;
+import com.example.onlineclass.service.imp.EvaluateServiceImp;
 import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/evaluate")
 public class EvaluateController {
     private final EvaluateRepository evaluateRepository;
-    private final EvaluateDetailImp evaluateDetailImp;
+    private final EvaluateServiceImp evaluateDetailImp;
 
 
-    public EvaluateController(EvaluateRepository evaluateRepository, EvaluateDetailImp evaluateDetailImp) {
+    public EvaluateController(EvaluateRepository evaluateRepository, EvaluateServiceImp evaluateDetailImp) {
         this.evaluateRepository = evaluateRepository;
         this.evaluateDetailImp = evaluateDetailImp;
     }

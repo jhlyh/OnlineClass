@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Data
-public class ChapterProps implements Props {
-    private String returnDomain = "sections";
+public class UserProps implements Props {
+    private String returnDomain = "users";
     private Integer sortDirectionIndex = 1;
     private Integer theSortByIndex = 0;
     private String returnCurrentPage = "currentPage";

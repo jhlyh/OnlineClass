@@ -1,5 +1,6 @@
 package com.example.onlineclass.props;
 
+import com.example.onlineclass.props.flagInterface.Props;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 

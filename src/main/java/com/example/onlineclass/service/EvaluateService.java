@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * @author jhlyh
  */
-public interface EvaluateDetail {
+public interface EvaluateService {
     /**
      * 根据课程ID提取课程评价进行分页排序查询
      * @param courseId

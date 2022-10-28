@@ -1,8 +1,9 @@
-package com.example.onlineclass.service;
+package com.example.onlineclass.service.imp;
 
 import com.example.onlineclass.domain.Course;
 import com.example.onlineclass.props.CourseProps;
 import com.example.onlineclass.repository.CourseRepository;
+import com.example.onlineclass.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,12 +25,12 @@ import java.util.Map;
  * @author jhlyh
  */
 @Service
-public class CourseDetailImp implements CourseDetail {
+public class CourseServiceImp implements CourseService {
     private final CourseRepository courseRepository;
     private final CourseProps courseProps;
 
     @Autowired
-    public CourseDetailImp(CourseRepository courseRepository, CourseProps courseProps) {
+    public CourseServiceImp(CourseRepository courseRepository, CourseProps courseProps) {
         this.courseRepository = courseRepository;
         this.courseProps = courseProps;
     }

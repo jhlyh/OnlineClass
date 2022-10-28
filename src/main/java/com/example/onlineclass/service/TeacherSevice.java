@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * @author jhlyh
  */
-public interface TeacherDetail {
+public interface TeacherSevice {
     /**
      * 分页排序查询
      * @param page

@@ -3,7 +3,7 @@ package com.example.onlineclass.controller;
 import com.example.onlineclass.domain.Teacher;
 import com.example.onlineclass.props.CommonProps;
 import com.example.onlineclass.repository.TeacherRepository;
-import com.example.onlineclass.service.TeacherDetailImp;
+import com.example.onlineclass.service.imp.TeacherSeviceImp;
 import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.*;
 public class TeacherController {
 
     private final TeacherRepository teacherRepository;
-    private final TeacherDetailImp teacherDetailImp;
+    private final TeacherSeviceImp teacherDetailImp;
     private final CommonProps commonProps;
 
-    public TeacherController(TeacherRepository teacherRepository, TeacherDetailImp teacherDetailImp, CommonProps commonProps) {
+    public TeacherController(TeacherRepository teacherRepository, TeacherSeviceImp teacherDetailImp, CommonProps commonProps) {
         this.teacherRepository = teacherRepository;
         this.teacherDetailImp = teacherDetailImp;
         this.commonProps = commonProps;

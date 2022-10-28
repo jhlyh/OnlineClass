@@ -3,7 +3,7 @@ package com.example.onlineclass.controller;
 import com.example.onlineclass.domain.Chapter;
 import com.example.onlineclass.props.CommonProps;
 import com.example.onlineclass.repository.ChapterRepository;
-import com.example.onlineclass.service.ChapterDetailImp;
+import com.example.onlineclass.service.imp.ChapterServiceImp;
 import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/section")
 public class ChapterController {
     private final ChapterRepository chapterRepository;
-    private final ChapterDetailImp chapterDetailImp;
+    private final ChapterServiceImp chapterDetailImp;
     private final CommonProps commonProps;
 
-    public ChapterController(ChapterRepository chapterRepository, ChapterDetailImp chapterDetailImp, CommonProps commonProps) {
+    public ChapterController(ChapterRepository chapterRepository, ChapterServiceImp chapterDetailImp, CommonProps commonProps) {
         this.chapterRepository = chapterRepository;
         this.chapterDetailImp = chapterDetailImp;
         this.commonProps = commonProps;

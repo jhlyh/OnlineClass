@@ -1,4 +1,4 @@
-package com.example.onlineclass.props;
+package com.example.onlineclass.props.flagInterface;
 
 public interface Props {
     /**

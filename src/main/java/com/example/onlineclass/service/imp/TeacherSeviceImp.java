@@ -1,19 +1,21 @@
-package com.example.onlineclass.service;
+package com.example.onlineclass.service.imp;
 
 import com.example.onlineclass.props.TeacherProps;
 import com.example.onlineclass.repository.TeacherRepository;
+import com.example.onlineclass.service.TeacherSevice;
+import com.example.onlineclass.service.imp.CommonServiceImp;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
 @Service
-public class TeacherDetailImp implements TeacherDetail {
+public class TeacherSeviceImp implements TeacherSevice {
 
     private final TeacherRepository teacherRepository;
     private final TeacherProps teacherProps;
-    private final CommonDetailImp commonDetailImp;
+    private final CommonServiceImp commonDetailImp;
 
-    public TeacherDetailImp(TeacherRepository teacherRepository, TeacherProps teacherProps, CommonDetailImp commonDetailImp) {
+    public TeacherSeviceImp(TeacherRepository teacherRepository, TeacherProps teacherProps, CommonServiceImp commonDetailImp) {
         this.teacherRepository = teacherRepository;
         this.teacherProps = teacherProps;
         this.commonDetailImp = commonDetailImp;

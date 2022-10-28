@@ -1,8 +1,9 @@
-package com.example.onlineclass.service;
+package com.example.onlineclass.service.imp;
 
 import com.example.onlineclass.domain.Chapter;
 import com.example.onlineclass.props.ChapterProps;
 import com.example.onlineclass.repository.ChapterRepository;
+import com.example.onlineclass.service.ChapterService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,11 +21,11 @@ import java.util.Map;
  * @author jhlyh
  */
 @Service
-public class ChapterDetailImp implements ChapterDetail {
+public class ChapterServiceImp implements ChapterService {
     private final ChapterRepository chapterRepository;
     private final ChapterProps chapterProps;
 
-    public ChapterDetailImp(ChapterRepository chapterRepository, ChapterProps chapterProps) {
+    public ChapterServiceImp(ChapterRepository chapterRepository, ChapterProps chapterProps) {
         this.chapterRepository = chapterRepository;
         this.chapterProps = chapterProps;
     }
