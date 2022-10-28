@@ -2,8 +2,11 @@ package com.example.onlineclass.controller;
 
 import com.example.onlineclass.domain.StudyLog;
 import com.example.onlineclass.repository.StudyLogRepository;
+import com.example.onlineclass.service.imp.StudyLogServiceImp;
 import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.criteria.CriteriaBuilder;
 
 /**
  * @author jhlyh
@@ -12,11 +15,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/studyLog")
 public class StudyLogController {
     private final StudyLogRepository studyLogRepository;
+    private final StudyLogServiceImp studyLogServiceImp;
 
-    public StudyLogController(StudyLogRepository studyLogRepository) {
+    public StudyLogController(StudyLogRepository studyLogRepository, StudyLogServiceImp studyLogServiceImp) {
+        this.studyLogServiceImp = studyLogServiceImp;
         this.studyLogRepository = studyLogRepository;
     }
 
+    /**
+     * 增加
+     * @param studyLog
+     * @return
+     */
     @PostMapping("/add")
     public Result<?> add(@RequestBody StudyLog studyLog) {
         try {
@@ -26,6 +36,11 @@ public class StudyLogController {
         }
     }
 
+    /**
+     * 更新
+     * @param studyLog
+     * @return
+     */
     @PostMapping("update")
     public Result<?> update(@RequestBody StudyLog studyLog) {
         try {
@@ -36,8 +51,7 @@ public class StudyLogController {
     }
 
     /**
-     * 未完成
-     *
+     * 根据用户Id分页排序查询学习记录
      * @param page
      * @param size
      * @param sort
@@ -45,13 +59,19 @@ public class StudyLogController {
      */
     @GetMapping("/findAll")
     public Result<?> findAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size,
+            @RequestParam Long userId,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "3") Integer size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
-        return Result.success(studyLogRepository.findAll());
+        return Result.success(studyLogServiceImp.getAllStudyLogPage(userId, page, size, sort));
     }
 
+    /**
+     * 根据id查询学习记录
+     * @param id
+     * @return
+     */
     @GetMapping("find")
     public Result<?> findById(@RequestParam Long id) {
         try {
@@ -62,6 +82,11 @@ public class StudyLogController {
         }
     }
 
+    /**
+     * 根据Id删除学习记录
+     * @param id
+     * @return
+     */
     @DeleteMapping("/delete")
     public Result<?> deleteById(@RequestParam Long id) {
         try {
