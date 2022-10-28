@@ -50,11 +50,12 @@ public class GradeController {
      */
     @GetMapping("/findAll")
     public Result<?> findAll(
+            @RequestParam(required = false) String name,
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "3") Integer size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
-        return Result.success(gradeServiceImp.getAllGradePage(page, size, sort));
+        return Result.success(gradeServiceImp.getAllGradePage(name, page, size, sort));
     }
 
     @GetMapping("find")

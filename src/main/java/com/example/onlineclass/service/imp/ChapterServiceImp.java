@@ -37,10 +37,9 @@ public class ChapterServiceImp implements ChapterService {
     }
 
     /**
-     * 根据课程ID分页排序返回章节信息
-     * 首先查看排序是否为多样排序，再进行排序分页
-     *
+     * 根据课程Id和名字模糊查询
      * @param courseId
+     * @param name
      * @param page
      * @param size
      * @param sort

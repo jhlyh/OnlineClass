@@ -1,26 +1,76 @@
 package com.example.onlineclass.service.imp;
 
+import com.example.onlineclass.domain.Chapter;
+import com.example.onlineclass.domain.Grade;
 import com.example.onlineclass.props.GradeProps;
 import com.example.onlineclass.repository.GradeRepository;
 import com.example.onlineclass.service.GradeService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class GradeServiceImp implements GradeService {
     private final GradeProps gradeProps;
     private final GradeRepository gradeRepository;
-    private final CommonServiceImp commonServiceImp;
 
-    public GradeServiceImp(GradeProps gradeProps, GradeRepository gradeRepository, CommonServiceImp commonServiceImp) {
-        this.commonServiceImp = commonServiceImp;
+
+    public GradeServiceImp(GradeProps gradeProps, GradeRepository gradeRepository) {
         this.gradeProps = gradeProps;
         this.gradeRepository = gradeRepository;
     }
 
     @Override
-    public Map<String, Object> getAllGradePage(Integer page,Integer size, String[] sort) {
-        return commonServiceImp.getAllPage(page, size, sort, gradeRepository, gradeProps);
+    public Map<String, Object> getAllGradePage(String name, Integer page, Integer size, String[] sort) {
+        try {
+            Specification<Grade> queryCondition = new Specification<Grade>() {
+                @Override
+                public Predicate toPredicate(Root<Grade> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                    List<Predicate> predicateList = new ArrayList<>();
+                    if (name != null) {
+                        predicateList.add(criteriaBuilder.like(root.get("name"), "%" + name + "%"));
+                    }
+                    return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
+                }
+            };
+
+            List<Sort.Order> orders = new ArrayList<>();
+            if (sort[0].contains(",")) {
+                for (String sortOrder : sort) {
+                    String[] _sort = sortOrder.split(",");
+                    orders.add(new Sort.Order(Sort.Direction.fromString(_sort[gradeProps.getSortDirectionIndex()]), _sort[gradeProps.getTheSortByIndex()]));
+                }
+            } else {
+                orders.add(new Sort.Order(Sort.Direction.fromString(sort[gradeProps.getSortDirectionIndex()]), sort[gradeProps.getTheSortByIndex()]));
+            }
+
+            Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
+            Page<Grade> sectionPage = gradeRepository.findAll(queryCondition, pageable);
+            List<Grade> chapters = sectionPage.getContent();
+            Map<String, Object> response = new HashMap<>();
+
+            response.put(gradeProps.getReturnDomain(), chapters);
+            response.put(gradeProps.getReturnTotalPages(), sectionPage.getTotalPages());
+            response.put(gradeProps.getReturnCurrentPage(), sectionPage.getNumber());
+            response.put(gradeProps.getReturnTotalItems(), sectionPage.getTotalElements());
+
+            return response;
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
     }
 }
