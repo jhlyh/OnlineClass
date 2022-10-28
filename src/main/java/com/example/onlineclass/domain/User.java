@@ -56,13 +56,6 @@ public class User implements Serializable {
     private Teacher teacher;
 
     /**
-     * 与管理班级为一对多关系（如果是班主任）
-     */
-    @OneToMany(mappedBy = "headteacher")
-    @JsonIgnore
-    private List<Grade> manageGrades;
-
-    /**
      * 与评价为一对多关系
      */
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

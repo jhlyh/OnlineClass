@@ -62,4 +62,11 @@ public class Teacher implements Serializable {
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"teacher", "type", "evaluates", "chapters",})
     private List<Course> courses;
+
+    /**
+     * 老师管理班级，一对多
+     */
+    @OneToMany(mappedBy = "headteacher")
+    @JsonIgnoreProperties({"headteacher","classes"})
+    private List<Grade> grades;
 }
