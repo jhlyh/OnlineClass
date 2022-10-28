@@ -2,6 +2,7 @@ package com.example.onlineclass.controller;
 
 import com.example.onlineclass.domain.Type;
 import com.example.onlineclass.repository.TypeRepository;
+import com.example.onlineclass.service.imp.TypeServiceImp;
 import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/type")
 public class TypeController {
     private final TypeRepository typeRepository;
+    private final TypeServiceImp typeServiceImp;
 
-    public TypeController(TypeRepository typeRepository) {
+    public TypeController(TypeRepository typeRepository, TypeServiceImp typeServiceImp) {
+        this.typeServiceImp =typeServiceImp;
         this.typeRepository = typeRepository;
     }
 
@@ -35,21 +38,17 @@ public class TypeController {
         }
     }
 
+
     /**
-     * 未完成
-     *
-     * @param page
-     * @param size
-     * @param sort
+     * 根据类型模糊查询
+     * @param name
      * @return
      */
     @GetMapping("/findAll")
     public Result<?> findAll(
-            @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "3") Integer size,
-            @RequestParam(defaultValue = "id,desc") String[] sort
+            @RequestParam(required = false) String name
     ) {
-        return Result.success(typeRepository.findAll());
+        return Result.success(typeServiceImp.getAllType(name));
     }
 
     @GetMapping("find")
