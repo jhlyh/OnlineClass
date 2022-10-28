@@ -41,7 +41,7 @@ public class Chapter implements Serializable {
     private Integer sort;
 
     /**
-     * 与学习记录为一对多关系，且章节具有级联权力
+     * 与学习记录为一对多关系，且章节具有级联权力.
      */
     @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL)
     @JsonIgnore

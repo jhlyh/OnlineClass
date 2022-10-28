@@ -17,6 +17,6 @@ public class CommonProps {
     private String ftpVideoPathName = "/videos";
     private String nginxPath = "http://114.132.251.197:888/";
     private String frontEndError = "4xx";
-    private String AfterEndError = "5xx";
+    private String afterEndError = "5xx";
 
 }

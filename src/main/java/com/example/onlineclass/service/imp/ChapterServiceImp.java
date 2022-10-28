@@ -1,6 +1,7 @@
 package com.example.onlineclass.service.imp;
 
 import com.example.onlineclass.domain.Chapter;
+import com.example.onlineclass.domain.Course;
 import com.example.onlineclass.props.ChapterProps;
 import com.example.onlineclass.repository.ChapterRepository;
 import com.example.onlineclass.service.ChapterService;
@@ -10,8 +11,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,8 +47,22 @@ public class ChapterServiceImp implements ChapterService {
      * @return
      */
     @Override
-    public Map<String, Object> getAllChaptersPage(Long courseId, Integer page, Integer size, String[] sort) {
+    public Map<String, Object> getAllChaptersPage(Long courseId, String name, Integer page, Integer size, String[] sort) {
         try {
+        Specification<Chapter> queryCondition = new Specification<Chapter>() {
+            @Override
+            public Predicate toPredicate(Root<Chapter> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                List<Predicate> predicateList = new ArrayList<>();
+                if(courseId != null) {
+                    predicateList.add(criteriaBuilder.equal(root.get("course"), courseId));
+                }
+                if (name != null) {
+                    predicateList.add(criteriaBuilder.like(root.get("name"), "%" + name + "%"));
+                }
+                return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
+            }
+        };
+
             List<Order> orders = new ArrayList<>();
             if (sort[0].contains(",")) {
                 for (String sortOrder : sort) {
@@ -54,7 +74,7 @@ public class ChapterServiceImp implements ChapterService {
             }
 
             Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
-            Page<Chapter> sectionPage = chapterRepository.findByCourseId(courseId, pageable);
+            Page<Chapter> sectionPage = chapterRepository.findAll(queryCondition, pageable);
             List<Chapter> chapters = sectionPage.getContent();
             Map<String, Object> response = new HashMap<>();
 
@@ -66,6 +86,7 @@ public class ChapterServiceImp implements ChapterService {
             return response;
 
         } catch (Exception e) {
+            System.out.println(e.toString());
             return null;
         }
     }

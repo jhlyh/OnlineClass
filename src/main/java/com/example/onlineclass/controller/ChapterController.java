@@ -43,12 +43,13 @@ public class ChapterController {
 
     @GetMapping("/findAll")
     public Result<?> findAllByCourseId(
-            @RequestParam Long courseId,
+            @RequestParam(required = false) Long courseId,
+            @RequestParam(required = false) String name,
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "3") Integer size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
-        return Result.success(chapterDetailImp.getAllChaptersPage(courseId, page, size, sort));
+        return Result.success(chapterDetailImp.getAllChaptersPage(courseId, name, page, size, sort));
     }
 
     @GetMapping("/find")
