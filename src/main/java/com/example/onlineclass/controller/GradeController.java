@@ -2,6 +2,7 @@ package com.example.onlineclass.controller;
 
 import com.example.onlineclass.domain.Grade;
 import com.example.onlineclass.repository.GradeRepository;
+import com.example.onlineclass.service.imp.GradeServiceImp;
 import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/grade")
 public class GradeController {
     private final GradeRepository gradeRepository;
+    private final GradeServiceImp gradeServiceImp;
 
-    public GradeController(GradeRepository gradeRepository) {
+    public GradeController(GradeRepository gradeRepository, GradeServiceImp gradeServiceImp) {
         this.gradeRepository = gradeRepository;
+        this.gradeServiceImp = gradeServiceImp;
     }
 
     @PostMapping("/add")
@@ -36,8 +39,7 @@ public class GradeController {
     }
 
     /**
-     * 未完成
-     *
+     * 分页查询
      * @param page
      * @param size
      * @param sort
@@ -49,7 +51,7 @@ public class GradeController {
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
-        return Result.success(gradeRepository.findAll());
+        return Result.success(gradeServiceImp.getAllGradePage(page, size, sort));
     }
 
     @GetMapping("find")
