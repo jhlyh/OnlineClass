@@ -69,15 +69,6 @@ public class CourseController {
         }
     }
 
-    @GetMapping("/findByNameLike")
-    public Result<?> findByNameLike(@RequestParam String name) {
-        try {
-            return Result.success(courseRepository.findByNameLike("%" + name + "%"));
-        } catch (Exception e) {
-            return Result.error(commonProps.getAfterEndError(), e.toString());
-        }
-    }
-
     @DeleteMapping("delete")
     public Result<?> deleteById(@RequestParam Long id) {
         try {

@@ -19,6 +19,13 @@ public class TeacherDetailImp implements TeacherDetail {
         this.commonDetailImp = commonDetailImp;
     }
 
+    /**
+     * 调用内聚的commonDetailImp实现分页排序查询
+     * @param page
+     * @param size
+     * @param sort
+     * @return
+     */
     @Override
     public Map<String, Object> getAllTeachersPage(int page, int size, String[] sort) {
         return commonDetailImp.getAllPage(page, size, sort, teacherRepository, teacherProps);

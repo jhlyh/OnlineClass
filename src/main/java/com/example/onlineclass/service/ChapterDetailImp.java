@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author jhlyh
+ */
 @Service
 public class ChapterDetailImp implements ChapterDetail {
     private final ChapterRepository chapterRepository;
@@ -26,6 +29,15 @@ public class ChapterDetailImp implements ChapterDetail {
         this.chapterProps = chapterProps;
     }
 
+    /**
+     * 根据课程ID分页排序返回章节信息
+     * 首先查看排序是否为多样排序，再进行排序分页
+     * @param courseId
+     * @param page
+     * @param size
+     * @param sort
+     * @return
+     */
     @Override
     public Map<String, Object> getAllChaptersPage(Long courseId, int page, int size, String[] sort) {
         try {

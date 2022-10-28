@@ -28,6 +28,15 @@ public class CommonDetailImp implements CommonDetail {
         this.commonProps = commonProps;
     }
 
+    /**
+     * 上传文件方法实现
+     * 首先连接FTP，
+     * 再将要上传的文件二进制话，
+     * 再返回上传的地址
+     * @param multipartFile
+     * @param path
+     * @return
+     */
     @Override
     public Result<?> uploadFile(MultipartFile multipartFile, String path) {
         String fileName = multipartFile.getOriginalFilename();
@@ -56,6 +65,15 @@ public class CommonDetailImp implements CommonDetail {
         return Result.success(commonProps.getNginxPath() + fileName);
     }
 
+    /**
+     * 将仅仅是排序分页功能进行内聚，降低重复性代码
+     * @param page
+     * @param size
+     * @param sort
+     * @param jpaRepository
+     * @param props
+     * @return
+     */
     @Override
     public Map<String, Object> getAllPage(int page, int size, String[] sort, JpaRepository jpaRepository, Props props) {
         try {

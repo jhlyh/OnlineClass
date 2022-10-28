@@ -27,15 +27,23 @@ import java.util.Map;
 public class CourseDetailImp implements CourseDetail {
     private final CourseRepository courseRepository;
     private final CourseProps courseProps;
-    private final CommonDetailImp commonDetailImp;
 
     @Autowired
-    public CourseDetailImp(CourseRepository courseRepository, CourseProps courseProps, CommonDetailImp commonDetailImp) {
+    public CourseDetailImp(CourseRepository courseRepository, CourseProps courseProps) {
         this.courseRepository = courseRepository;
         this.courseProps = courseProps;
-        this.commonDetailImp = commonDetailImp;
     }
 
+
+    /**
+     * 根据课程类型以及名字模糊分页排序查询
+     * @param typeId
+     * @param name
+     * @param page
+     * @param size
+     * @param sort
+     * @return
+     */
     @Override
     public Map<String, Object> getAllCoursesPage(Integer typeId,String name, Integer page, Integer size, String[] sort) {
         Specification<Course> queryCondition = new Specification<Course>() {

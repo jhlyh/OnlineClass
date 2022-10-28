@@ -28,6 +28,14 @@ public class EvaluateDetailImp implements EvaluateDetail {
         this.evaluateProps = evaluateProps;
     }
 
+    /**
+     * 根据课程ID分页查询实现
+     * @param courseId
+     * @param page
+     * @param size
+     * @param sort
+     * @return
+     */
     @Override
     public Map<String, Object> getAllEvaluatePage(Long courseId, int page, int size, String[] sort) {
         try {

@@ -11,7 +11,22 @@ import java.util.Map;
  * @author jhlyh
  */
 public interface CommonDetail {
+    /**
+     * 上传文件接口
+     * @param multipartFile
+     * @param path
+     * @return
+     */
     Result<?> uploadFile(MultipartFile multipartFile, String path);
 
+    /**
+     * 分页排序接口
+     * @param page
+     * @param size
+     * @param sort
+     * @param jpaRepository
+     * @param props
+     * @return
+     */
     Map<String, Object> getAllPage(int page, int size, String[] sort, JpaRepository jpaRepository, Props props);
 }

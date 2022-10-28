@@ -15,6 +15,9 @@ import java.util.List;
  * @author jhlyh
  */
 public interface CourseRepository extends JpaRepository<Course, Long> , JpaSpecificationExecutor<Course> {
+    /**
+     * 返回所有的课程ID及其类型
+     * @return
+     */
     List<CourseIdAndType> findAllBy();
-    List<Course> findByNameLike(String name);
 }
