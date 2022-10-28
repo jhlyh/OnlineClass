@@ -56,13 +56,6 @@ public class User implements Serializable {
     private Teacher teacher;
 
     /**
-     * 与班级为一对多关系
-     */
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"user", "aGrade"})
-    private List<UserGrade> grades;
-
-    /**
      * 与管理班级为一对多关系（如果是班主任）
      */
     @OneToMany(mappedBy = "headteacher")
@@ -113,4 +106,11 @@ public class User implements Serializable {
     )
     @JsonIgnore
     private EvaluateLike evaluateLike;
+
+    /**
+     * 与班级为多对多关系
+     */
+    @ManyToMany(mappedBy = "classes")
+    @JsonIgnoreProperties({"headteacher", "classes"})
+    private List<Grade> grades;
 }

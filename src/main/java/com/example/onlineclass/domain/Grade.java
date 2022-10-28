@@ -32,12 +32,6 @@ public class Grade implements Serializable {
     private String atmosphere;
     private String coverUrl;
 
-    /**
-     * 与用户表为一对多关系
-     */
-    @OneToMany(mappedBy = "aGrade", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"aGrade"})
-    private List<UserGrade> userGrades;
 
     /**
      * 与班主任为多对一关系
@@ -50,4 +44,16 @@ public class Grade implements Serializable {
     )
     @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades", "notes", "studyLogs", "noteLike", "evaluateLike"})
     private User headteacher;
+
+    /**
+     * 与用户为多对多关系
+     */
+    @ManyToMany
+    @JoinTable(
+            name = "user_grade",
+            joinColumns = @JoinColumn(name = "grade"),
+            inverseJoinColumns = @JoinColumn(name = "user")
+    )
+    @JsonIgnoreProperties({"evaluateLike","noteLike", "studyLogs", "notes", "evaluates", "manageGrades", "teacher"})
+    private List<User> classes;
 }

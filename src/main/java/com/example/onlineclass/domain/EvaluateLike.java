@@ -37,7 +37,7 @@ public class EvaluateLike implements Serializable {
      * 与用户为一对多关系
      */
     @OneToMany(mappedBy = "evaluateLike")
-    @JsonIgnoreProperties({"evaluates", "teacher", "User", "manageGrades", "notes", "studyLogs", "noteLike", "evaluateLike"})
+    @JsonIgnoreProperties({"evaluateLike","noteLike", "studyLogs", "notes", "evaluates", "manageGrades", "teacher"})
     private List<User> users;
 
     /**
