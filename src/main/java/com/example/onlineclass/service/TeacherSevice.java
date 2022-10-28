@@ -14,5 +14,5 @@ public interface TeacherSevice {
      * @param sort
      * @return
      */
-    Map<String, Object> getAllTeachersPage(Integer page, Integer size, String[] sort);
+    Map<String, Object> getAllTeachersPage(String name, Integer page, Integer size, String[] sort);
 }

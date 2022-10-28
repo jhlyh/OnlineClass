@@ -46,11 +46,12 @@ public class TeacherController {
 
     @GetMapping("/findAll")
     public Result<?> findAll(
+            @RequestParam(required = false) String name,
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "3") Integer size,
             @RequestParam(defaultValue = "id,desc") String[] sort) {
 
-        return Result.success(teacherDetailImp.getAllTeachersPage(page, size, sort));
+        return Result.success(teacherDetailImp.getAllTeachersPage(name, page, size, sort));
     }
 
     @GetMapping("find")
