@@ -17,11 +17,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author jhlyh
@@ -40,10 +36,10 @@ public class ChapterServiceImp implements ChapterService {
      * 根据课程Id和名字模糊查询
      *
      * @param courseId 课程ID
-     * @param name 章节名
-     * @param page 页码
-     * @param size 页大小
-     * @param sort 排序
+     * @param name     章节名
+     * @param page     页码
+     * @param size     页大小
+     * @param sort     排序
      * @return map对象
      */
     @Override

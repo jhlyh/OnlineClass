@@ -15,6 +15,7 @@ public interface CourseRepository extends JpaRepository<Course, Long>, JpaSpecif
 
     /**
      * 返回所有的课程ID及其类型
+     *
      * @return ID and type
      */
     List<CourseIdAndType> findAllBy();

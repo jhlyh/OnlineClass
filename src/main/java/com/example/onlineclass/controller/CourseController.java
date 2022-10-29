@@ -51,7 +51,7 @@ public class CourseController {
             @RequestParam(defaultValue = "3") Integer size,
             @RequestParam(defaultValue = "id,desc") String[] sort
     ) {
-            return Result.success(courseDetailImp.getAllCoursesPage(typeId, name, page, size, sort));
+        return Result.success(courseDetailImp.getAllCoursesPage(typeId, name, page, size, sort));
     }
 
     @GetMapping("/find")
