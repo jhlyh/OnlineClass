@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
  * @author jhlyh
  */
-public interface TypeRepository extends JpaRepository<Type, Long> , JpaSpecificationExecutor<Type> {
+public interface TypeRepository extends JpaRepository<Type, Long>, JpaSpecificationExecutor<Type> {
 }

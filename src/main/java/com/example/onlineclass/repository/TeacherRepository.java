@@ -15,7 +15,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long>, JpaSpec
     /**
      * 查询返回老师名字及其ID
      *
-     * @return
+     * @return ID and Name
      */
     List<TeacherIdAndName> findAllBy();
 }

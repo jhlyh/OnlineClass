@@ -1,7 +1,6 @@
 package com.example.onlineclass.service.imp;
 
 import com.example.onlineclass.domain.Chapter;
-import com.example.onlineclass.domain.Course;
 import com.example.onlineclass.props.ChapterProps;
 import com.example.onlineclass.repository.ChapterRepository;
 import com.example.onlineclass.service.ChapterService;
@@ -19,6 +18,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,29 +38,30 @@ public class ChapterServiceImp implements ChapterService {
 
     /**
      * 根据课程Id和名字模糊查询
-     * @param courseId
-     * @param name
-     * @param page
-     * @param size
-     * @param sort
-     * @return
+     *
+     * @param courseId 课程ID
+     * @param name 章节名
+     * @param page 页码
+     * @param size 页大小
+     * @param sort 排序
+     * @return map对象
      */
     @Override
     public Map<String, Object> getAllChaptersPage(Long courseId, String name, Integer page, Integer size, String[] sort) {
         try {
-        Specification<Chapter> queryCondition = new Specification<Chapter>() {
-            @Override
-            public Predicate toPredicate(Root<Chapter> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-                List<Predicate> predicateList = new ArrayList<>();
-                if(courseId != null) {
-                    predicateList.add(criteriaBuilder.equal(root.get("course"), courseId));
+            Specification<Chapter> queryCondition = new Specification<Chapter>() {
+                @Override
+                public Predicate toPredicate(Root<Chapter> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                    List<Predicate> predicateList = new ArrayList<>();
+                    if (courseId != null) {
+                        predicateList.add(criteriaBuilder.equal(root.get("course"), courseId));
+                    }
+                    if (name != null) {
+                        predicateList.add(criteriaBuilder.like(root.get("name"), "%" + name + "%"));
+                    }
+                    return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
                 }
-                if (name != null) {
-                    predicateList.add(criteriaBuilder.like(root.get("name"), "%" + name + "%"));
-                }
-                return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
-            }
-        };
+            };
 
             List<Order> orders = new ArrayList<>();
             if (sort[0].contains(",")) {
@@ -85,8 +86,7 @@ public class ChapterServiceImp implements ChapterService {
             return response;
 
         } catch (Exception e) {
-            System.out.println(e.toString());
-            return null;
+            return Collections.emptyMap();
         }
     }
 }

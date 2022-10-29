@@ -1,6 +1,5 @@
 package com.example.onlineclass.service.imp;
 
-import com.example.onlineclass.domain.Chapter;
 import com.example.onlineclass.domain.Grade;
 import com.example.onlineclass.props.GradeProps;
 import com.example.onlineclass.repository.GradeRepository;
@@ -17,6 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,10 +58,10 @@ public class GradeServiceImp implements GradeService {
 
             Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
             Page<Grade> sectionPage = gradeRepository.findAll(queryCondition, pageable);
-            List<Grade> chapters = sectionPage.getContent();
+            List<Grade> grades = sectionPage.getContent();
             Map<String, Object> response = new HashMap<>();
 
-            response.put(gradeProps.getReturnDomain(), chapters);
+            response.put(gradeProps.getReturnDomain(), grades);
             response.put(gradeProps.getReturnTotalPages(), sectionPage.getTotalPages());
             response.put(gradeProps.getReturnCurrentPage(), sectionPage.getNumber());
             response.put(gradeProps.getReturnTotalItems(), sectionPage.getTotalElements());
@@ -69,8 +69,7 @@ public class GradeServiceImp implements GradeService {
             return response;
 
         } catch (Exception e) {
-            System.out.println(e.toString());
-            return null;
+            return Collections.emptyMap();
         }
     }
 }

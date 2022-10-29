@@ -1,14 +1,9 @@
 package com.example.onlineclass.service.imp;
 
-import com.example.onlineclass.domain.Teacher;
 import com.example.onlineclass.domain.Type;
 import com.example.onlineclass.props.TypeProps;
 import com.example.onlineclass.repository.TypeRepository;
 import com.example.onlineclass.service.TypeService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -26,15 +21,15 @@ import java.util.Map;
  */
 @Service
 public class TypeServiceImp implements TypeService {
-    private TypeRepository typeRepository;
-    private TypeProps typeProps;
+    private final TypeRepository typeRepository;
+    private final TypeProps typeProps;
+
     public TypeServiceImp(TypeRepository typeRepository, TypeProps typeProps) {
         this.typeRepository = typeRepository;
         this.typeProps = typeProps;
     }
 
     /**
-     *
      * @param name
      * @return
      */
@@ -52,16 +47,16 @@ public class TypeServiceImp implements TypeService {
                 }
             };
 
-            List<Type> chapters = typeRepository.findAll(queryCondition);
+            List<Type> types = typeRepository.findAll(queryCondition);
             Map<String, Object> response = new HashMap<>();
 
-            response.put(typeProps.getReturnDomain(), chapters);
-            response.put(typeProps.getReturnTotalItems(), chapters.size());
+            response.put(typeProps.getReturnDomain(), types);
+            response.put(typeProps.getReturnTotalItems(), types.size());
 
             return response;
 
         } catch (Exception e) {
-            System.out.println(e.toString());
+            System.out.println(e);
             return null;
         }
     }

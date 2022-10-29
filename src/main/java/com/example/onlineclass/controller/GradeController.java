@@ -6,8 +6,6 @@ import com.example.onlineclass.service.imp.GradeServiceImp;
 import com.example.onlineclass.util.Result;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 /**
  * @author jhlyh
  */

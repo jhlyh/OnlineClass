@@ -1,6 +1,5 @@
 package com.example.onlineclass.service.imp;
 
-import com.example.onlineclass.domain.Chapter;
 import com.example.onlineclass.domain.Teacher;
 import com.example.onlineclass.props.TeacherProps;
 import com.example.onlineclass.repository.TeacherRepository;
@@ -66,10 +65,10 @@ public class TeacherSeviceImp implements TeacherSevice {
 
             Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
             Page<Teacher> sectionPage = teacherRepository.findAll(queryCondition, pageable);
-            List<Teacher> chapters = sectionPage.getContent();
+            List<Teacher> teachers = sectionPage.getContent();
             Map<String, Object> response = new HashMap<>();
 
-            response.put(teacherProps.getReturnDomain(), chapters);
+            response.put(teacherProps.getReturnDomain(), teachers);
             response.put(teacherProps.getReturnTotalPages(), sectionPage.getTotalPages());
             response.put(teacherProps.getReturnCurrentPage(), sectionPage.getNumber());
             response.put(teacherProps.getReturnTotalItems(), sectionPage.getTotalElements());
@@ -77,7 +76,7 @@ public class TeacherSeviceImp implements TeacherSevice {
             return response;
 
         } catch (Exception e) {
-            System.out.println(e.toString());
+            System.out.println(e);
             return null;
         }
     }

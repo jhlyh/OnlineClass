@@ -7,7 +7,8 @@ import java.util.Map;
  */
 public interface ChapterService {
     /**
-     *  根据课程Id和章节名字模糊分页排序查询
+     * 根据课程Id和章节名字模糊分页排序查询
+     *
      * @param courseId
      * @param name
      * @param page

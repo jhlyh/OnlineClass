@@ -50,10 +50,10 @@ public class StudyLogServiceImp implements StudyLogService {
 
             Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
             Page<StudyLog> sectionPage = studyLogRepository.findByUserId(userId, pageable);
-            List<StudyLog> chapters = sectionPage.getContent();
+            List<StudyLog> studyLogs = sectionPage.getContent();
             Map<String, Object> response = new HashMap<>();
 
-            response.put(studyLogProps.getReturnDomain(), chapters);
+            response.put(studyLogProps.getReturnDomain(), studyLogs);
             response.put(studyLogProps.getReturnTotalPages(), sectionPage.getTotalPages());
             response.put(studyLogProps.getReturnCurrentPage(), sectionPage.getNumber());
             response.put(studyLogProps.getReturnTotalItems(), sectionPage.getTotalElements());

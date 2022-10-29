@@ -53,10 +53,10 @@ public class EvaluateServiceImp implements EvaluateService {
 
             Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
             Page<Evaluate> sectionPage = evaluateRepository.findByCourseId(courseId, pageable);
-            List<Evaluate> chapters = sectionPage.getContent();
+            List<Evaluate> evaluates = sectionPage.getContent();
             Map<String, Object> response = new HashMap<>();
 
-            response.put(evaluateProps.getReturnDomain(), chapters);
+            response.put(evaluateProps.getReturnDomain(), evaluates);
             response.put(evaluateProps.getReturnTotalPages(), sectionPage.getTotalPages());
             response.put(evaluateProps.getReturnCurrentPage(), sectionPage.getNumber());
             response.put(evaluateProps.getReturnTotalItems(), sectionPage.getTotalElements());

@@ -7,7 +7,6 @@ import java.util.Map;
  */
 public interface TypeService {
     /**
-     *
      * @param name
      * @return
      */

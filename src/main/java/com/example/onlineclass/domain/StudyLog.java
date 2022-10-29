@@ -21,7 +21,7 @@ import java.util.Date;
  */
 @Data
 @Entity
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
 @RequiredArgsConstructor
 public class StudyLog implements Serializable {
     private static final long serialVersionUID = 1L;

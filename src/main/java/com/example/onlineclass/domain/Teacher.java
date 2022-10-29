@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Data
 @Entity
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
 @RequiredArgsConstructor
 public class Teacher implements Serializable {
     private static final long serialVersionUID = 1L;

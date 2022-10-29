@@ -12,10 +12,10 @@ import java.util.List;
  * @author jhlyh
  */
 public interface CourseRepository extends JpaRepository<Course, Long>, JpaSpecificationExecutor<Course> {
+
     /**
      * 返回所有的课程ID及其类型
-     *
-     * @return
+     * @return ID and type
      */
     List<CourseIdAndType> findAllBy();
 }

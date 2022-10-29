@@ -16,7 +16,7 @@ public class TypeController {
     private final TypeServiceImp typeServiceImp;
 
     public TypeController(TypeRepository typeRepository, TypeServiceImp typeServiceImp) {
-        this.typeServiceImp =typeServiceImp;
+        this.typeServiceImp = typeServiceImp;
         this.typeRepository = typeRepository;
     }
 
@@ -41,6 +41,7 @@ public class TypeController {
 
     /**
      * 根据类型模糊查询
+     *
      * @param name
      * @return
      */

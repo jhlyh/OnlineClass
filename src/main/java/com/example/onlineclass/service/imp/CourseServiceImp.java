@@ -56,7 +56,7 @@ public class CourseServiceImp implements CourseService {
                     predicateList.add(criteriaBuilder.equal(root.get("type"), typeId));
                 }
                 if (name != null) {
-                    predicateList.add(criteriaBuilder.like(root.get("name"), name));
+                    predicateList.add(criteriaBuilder.like(root.get("name"), "%" + name + "%"));
                 }
                 return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
             }
